@@ -8,6 +8,12 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 
 });
 
+window.onbeforeunload = verifJaquette;
+
+function verifJaquette(){
+	//"Verif Jaquette todo"
+}
+
 function infosLien(url){
 	document.getElementById('VideoUrl').value = 'http://allocine.fr' + url;
 	retour();
@@ -73,7 +79,11 @@ function popup(url){
 
 function actualiserAffiche(url){
 	alert(url);
-	document.getElementById('affiche').src = url;
+	var src;
+	if(url.match(/^http:\/\/*/g)) src = url;
+	else src = '/videotheque/img/' + url;
+	document.getElementById('affiche').src = src;
+	document.getElementById('VideoCover').value = url;
 }
 
 

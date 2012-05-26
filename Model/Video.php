@@ -16,7 +16,7 @@ class Video extends AppModel{
 	);
 
 	// many to one
-	public $belongsTo = array('Format','Media');
+	public $belongsTo = array('Format');
 
 
 	public function sizeValidation($check){

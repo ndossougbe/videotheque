@@ -70,8 +70,6 @@ class VideosController extends AppController{
 		$this->set('formats', $this->Video->Format->find('list'));
 		$this->set('webroot', $this->webroot);
 
-
-
 		if($this->request->is('put') || $this->request->is('post')){	// Vrai quand du contenu a été modifié ou ajouté(cf /lib/Cake/Network/CakeRequest.php)
 			if($this->Video->save($this->request->data)){
 				$this->Session->setFlash('La vidéo a bien été modifiée.','notif'); 
@@ -82,6 +80,66 @@ class VideosController extends AppController{
 			$this->Video->id = $id;
 			$this->request->data = $this->Video->read();
 		}
+	}
+
+	public function admin_addimg($id_video = null){
+		$this->layout = 'modal';
+		if($id_video){
+			$cover_dir = 'covers';
+			if($this->request->is('post')){
+				$data = $this->request->data;
+				
+				if(isset($data['url'])){
+					$this->set('url', urlencode($data['url']));
+					$this->redirect(array(
+						'action' => 'updateCover',
+						'controller' => 'Videos',
+						'?url='.urlencode($data['url'])
+					));
+				}
+
+				$dir = IMAGES.$cover_dir;
+				if(!file_exists($dir)){
+					mkdir($dir, 0777);
+				}
+				$f = explode('.',$data['file']['name']);	// découpe le nom de fichier en séparant par '.'
+				$ext = '.'.end($f);	// dernier élément du tableau
+
+				$f = array_slice($f, 0, -1);	// tous les éléments sauf le dernier
+				$f = implode('.',$f);			// recollage en mettant des points
+				$filename = Inflector::slug($f,'-'); // remplace les caractères spéciaux par '-'
+				
+
+				if(preg_match('/^.*\.(jpg|png|jpeg)$/',$filename.$ext)){
+					
+					move_uploaded_file($data['file']['tmp_name'], $dir.DS.$filename.$ext);
+
+					$url = $cover_dir.'/'.$filename.$ext;
+
+					$this->set('url', urlencode($url));
+					$this->redirect(array(
+						'action' => 'updateCover',
+						'controller' => 'Videos',
+						'?url='.urlencode($url)
+					));
+				}else{
+					$this->Session->setFlash("L'image n'est pas au bon format",'notif',array('type' => 'error'));
+				}
+
+			}
+
+			// Charge l'image de la vidéo dont l'id est passé en paramètre
+			$video = $this->Video->find('first',array('conditions' => array('Video.id' => $id_video)));
+			$d['src'] = $video['Video']['cover'];
+			$this->set($d);
+		}
+	}
+
+	public function admin_updateCover(){
+		//$this->set('url',Router::url('/img/'.urldecode($this->request->query['url'])));
+		$this->set('url',urldecode($this->request->query['url']));
+		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
+		$this->render('popup');
 	}
 }
 ?>

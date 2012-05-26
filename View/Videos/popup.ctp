@@ -1,6 +1,10 @@
-
+<?php echo debug($url) ?>
 <script type="text/javascript">
+function bleh(){
 	var win = window.dialogArguments || opener || parent || top;
-	win.actualiserAffiche("<?php echo $src ?>");
+	win.actualiserAffiche("<?php echo $url ?>");
 	self.close();
+}
+
+window.onload = bleh; 
 </script>

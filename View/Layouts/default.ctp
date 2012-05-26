@@ -50,9 +50,9 @@ $cakeDescription = __d('cake_dev', 'Videothèque');
 <?php
 	// Scripts à la fin pour pas alourdir le chargement de la page, fonctionnalités non indispensables à l'affichage.
 	echo $this->Html->script('jquery');
-	if(isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin'){
-		echo $this->Html->script('admin');
-	}
+	/*if(isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin'){
+		
+	}*/
 	echo $scripts_for_layout;
 ?>
 
