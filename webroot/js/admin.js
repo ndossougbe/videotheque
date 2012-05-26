@@ -78,7 +78,6 @@ function popup(url){
 
 
 function actualiserAffiche(url){
-	alert(url);
 	var src;
 	if(url.match(/^http:\/\/*/g)) src = url;
 	else src = '/videotheque/img/' + url;

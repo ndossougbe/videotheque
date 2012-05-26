@@ -731,3 +731,6 @@
 2012-05-26 14:18:55 Error: [MissingControllerException] Controller class ImgController could not be found.
 #0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2012-05-26 15:08:18 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

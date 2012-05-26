@@ -1,4 +1,3 @@
-<?php echo debug($url) ?>
 <script type="text/javascript">
 function bleh(){
 	var win = window.dialogArguments || opener || parent || top;
