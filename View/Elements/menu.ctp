@@ -7,10 +7,10 @@
 	}else{
 		$admin = false;
 		$cakeDescription = __d('cake_dev', 'Vidéothèque');
-	}
-
-	
+	}	
 ?>
+
+
 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>

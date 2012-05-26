@@ -5,6 +5,7 @@ class VideosController extends AppController{
 	 * modèle utilisé est XXX pour XXXsController
 	 */
 	public $uses = array('Video');
+	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
 	
 		/* Condition de projection*/
 		/*$q=$this->Video->find('all',array(
@@ -18,8 +19,14 @@ class VideosController extends AppController{
 		//Convention: $d => tableau des variables envoyées à la vue (display)
 	
 	function index(){
-		$d['videos'] = $this->Video->find('all',array('fields' => array('id','name')));
+		// Règles de pagination, définies ici localement. Mettre au début du ctrl pour global.
+		// défaut: 20
+		$this->paginate = array('Video' => array(
+			'limit' => 10	
+		));
+		$d['videos'] = $this->Paginate('Video');
 		$this->set($d);
+		$this->set('formats', $this->Video->Format->find('list'));
 	}
 	
 	function menu(){
@@ -31,7 +38,7 @@ class VideosController extends AppController{
 		if(!$id)
 			throw new NotFoundException('ID nul');
 		
-		$video = $this->Video->find('first',array('conditions' => array('id' => $id)));
+		$video = $this->Video->find('first',array('conditions' => array('Video.id' => $id)));
 		
 		if(empty($video))
 			throw new NotFoundException('Aucune vidéo ne correspond à cet ID ('.$id.').');
@@ -48,14 +55,8 @@ class VideosController extends AppController{
 	}
 
 	function admin_index(){
-		// Règles de pagination, définies ici localement. Mettre au début du ctrl pour global.
-		// défaut: 20
-		$this->paginate = array('Video' => array(
-			'limit' => 10	
-		));
-		$d['videos'] = $this->Paginate('Video');
-		$this->set($d);
-		$this->set('formats', $this->Video->Format->find('list'));
+		$this->index();
+		$this->render('index');
 	}
 
 	function admin_delete($id){
@@ -132,6 +133,9 @@ class VideosController extends AppController{
 			$video = $this->Video->find('first',array('conditions' => array('Video.id' => $id_video)));
 			$d['src'] = $video['Video']['cover'];
 			$this->set($d);
+		}
+		else{
+			$this->set('src',$this->jaquette_indisponible);
 		}
 	}
 

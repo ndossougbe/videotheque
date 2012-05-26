@@ -8,11 +8,8 @@ class Video extends AppModel{
 			'rule'		=> "notEmpty",
 			'required'	=> true,
 			'message'	=> "Le nom ne doit pas être vide."
-		)/*,
-		'size' => array(
-			'rule' => 'sizeValidation',
-			'message' => "Taille incorrecte ou incompatible avec le format."
-		)*/
+		),
+		'size' => 'numeric'
 	);
 
 	// many to one

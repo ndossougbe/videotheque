@@ -17,11 +17,10 @@ $cakeDescription = __d('cake_dev', 'Videothèque');
     <meta name="author" content="">
 
 	<!-- Fichiers.less: pas un fichier.css, il faut l'inclure comme ceci: -->
-	<link rel="stylesheet/less" href="<?php echo $this->Html->url('/css/style.less'); ?>"/>
+	<link rel="stylesheet/less" href="<?php echo $this->Html->url('/less/style.less'); ?>"/>
+  <link rel="stylesheet/less" href="<?php echo $this->Html->url('/less/bootstrap.less'); ?>"/>
 	<?php
 		echo $this->Html->meta('icon');
-		echo $this->Html->css('bootstrap');
-		echo $this->Html->css('bootstrap-responsive');
 		echo $this->Html->script('less');
 	?>
     <style>
@@ -49,7 +48,6 @@ $cakeDescription = __d('cake_dev', 'Videothèque');
     <?php echo $this->element('sql_dump'); ?>
     <?php
     	echo $this->Html->script('jquery');
-    	echo $this->Html->script('bootstrap');
     	echo $scripts_for_layout;
     ?>
 
