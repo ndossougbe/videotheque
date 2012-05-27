@@ -34,22 +34,30 @@ $cakeDescription = __d('cake_dev', 'Videothèque');
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container" id="menu">
         	<?php echo $this->element('menu'); ?>
         </div>
       </div>
     </div>
 
     <div class="container">
-		<?php echo $this->Session->flash(); ?>
-		<?php echo $content_for_layout; ?>
+  		<?php echo $this->Session->flash(); ?>
+  		<?php echo $content_for_layout; ?>
+
+
+      <footer class="footer">
+      <p>
+        Style d'après <a href="http://twitter.github.com/bootstrap">Twitter Bootstrap</a>, sous <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache v2.0</a><br>
+        Icones de <a href="http://glyphicons.com">Glyphicons Free</a>, sous licence <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+      </p> 
+    </footer>
     </div> <!-- /container -->
 
     <?php echo $this->element('sql_dump'); ?>
     <?php
     	echo $this->Html->script('jquery');
+      echo $this->Html->script('global_functions');
     	echo $scripts_for_layout;
     ?>
-
   </body>
 </html>

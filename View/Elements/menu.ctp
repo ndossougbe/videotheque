@@ -11,12 +11,7 @@
 ?>
 
 
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-</a>
-	<?php echo $this->Html->link($cakeDescription, '/',array('class' => 'brand'));?>
+<?php echo $this->Html->link($cakeDescription, '/',array('class' => 'brand'));?>
 <div class="nav-collapse">
 	<ul class="nav">
 		<li><?php echo $this->Html->link("Accueil", '/'); ?></li>

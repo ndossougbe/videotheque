@@ -1,5 +1,5 @@
 <div class=" alert <?php echo 'alert-'. (isset($type)? $type : 'success');?>">
-	<a class="close" href="#" onclick="$(this).parent().hide()">x</a>
+	<button class="close" onclick="$(this).parent().hide()">&times;</button>
 	<p> <?php echo $message ?> </p>
 
 </div>

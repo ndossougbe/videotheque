@@ -8,27 +8,21 @@
 		<table>
 			<tr>
 				<td style="width:60%;">
-						
 					<!-- Infos générales	 -->
 					<div class="control-group">
 						<?php echo $this->Form->input('name', array('label' => 'Titre', 'div' => array('style' => 'display: inline;')) ); ?>
-						<?php echo $this->Html->link("Chercher sur Allociné", "#", array(
+						<?php echo $this->Html->link(" <i class='icon-search'></i> Chercher sur Allociné", "#", array(
 							'onclick' => "rechercheAllocine(".$webroot." ); return false;",
-							'class' => 'btn'
+							'class' => 'btn',
+							'escape' => false
 						)); ?>
 					</div>
 
-					<div class="control-group">
-						<?php echo $this->Form->input('url', array('label' => 'Lien')); ?>
-					</div>
+					<?php echo $this->Form->input('url', array('label' => 'Lien')); ?>
 
-					<div class="control-group">
-						<?php echo $this->Form->input('format_id'); ?>
-					</div>
+					<?php echo $this->Form->input('format_id'); ?>
 
-					<div class="control-group">
-						<?php echo $this->Form->input('size', array('label' => 'Taille', 'type' => 'text')); ?>	
-					</div>
+					<?php echo $this->Form->input('size', array('label' => 'Taille', 'type' => 'text')); ?>	
 
 				</td>
 
