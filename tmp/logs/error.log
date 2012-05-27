@@ -784,3 +784,12 @@
 2012-05-27 01:17:05 Error: [MissingControllerException] Controller class CssController could not be found.
 #0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2012-05-27 16:20:56 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-05-27 16:25:29 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-05-27 16:25:29 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

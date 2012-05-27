@@ -11,11 +11,9 @@
 					<!-- Infos générales	 -->
 					<div class="control-group">
 						<?php echo $this->Form->input('name', array('label' => 'Titre', 'div' => array('style' => 'display: inline;')) ); ?>
-						<?php echo $this->Html->link(" <i class='icon-search'></i> Chercher sur Allociné", "#", array(
-							'onclick' => "rechercheAllocine(".$webroot." ); return false;",
-							'class' => 'btn',
-							'escape' => false
-						)); ?>
+						<a class="btn" data-toggle="modal" href="#rech_div" onclick="rechercheAllocine('<?php echo $webroot; ?>');">
+							<i class='icon-search'></i> Chercher sur Allociné
+						</a>
 					</div>
 
 					<?php echo $this->Form->input('url', array('label' => 'Lien')); ?>
@@ -56,13 +54,26 @@
 
 		<?php echo  $this->Form->submit("Enregistrer", array('class' => 'btn') )?>
 
+		<div class="modal hide" id="rech_div">
+			<div class="modal-header">
+			    <button class="close" data-dismiss="modal">&times;</button>
+			    <h3>Résultats de la recherche</h3>
+			  </div>
+			  <div class="modal-body" id="resultats"></div>
+			  <div class="modal-footer">
+			    <a href="#" class="btn" data-dismiss="modal">Fermer</a>
+			  </div>
+		</div>
+
+
 	<?php echo $this->Form->end(); ?>
 </div>
 
-<div id="rech_div" style="display: none;">
+<!-- <div id="rech_div" style="display: none;"> -->
 	<!-- TODO: Popin? -->
-	<iframe src="" width="100%" height="800" name="rechFrame" id="rechFrame"></iframe>
-</div>
+	<!-- <iframe src="" width="100%" height="800" name="rechFrame" id="rechFrame"></iframe>
+</div> -->
 
 <!-- JavaScript -->
 <?php echo $this->Html->script('admin',array('inline' => false)); ?>
+<?php echo $this->Html->script('bootstrap-modal',array('inline' => false)); ?>

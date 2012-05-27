@@ -25,13 +25,6 @@ function trim (str){
 	return str.replace(/^\s+/g,'').replace(/\s+$/g,'');
 } 
 
-function retour(){
-	document.getElementById('form_div').style.display="";
-	document.getElementById('rech_div').style.display="none";
-	document.getElementById('rechFrame').src = "";
-	
-}
-
 
 function rechercheAllocine(webroot){
 	
@@ -41,22 +34,17 @@ function rechercheAllocine(webroot){
 		toFind = toFind.replace(/ /g,'%2B'); // On remplace les espaces par '+'
 		var uri = webroot+"scrap.php?q="+toFind;
 
-		document.getElementById('form_div').style.display="none";
+		var xhr = new XMLHttpRequest();
 
-		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			//alert(xhr.readyState + " " + xhr.status);
+			if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+				document.getElementById('resultats').innerHTML = xhr.responseText;
+			}
+		};
+
 	    xhr.open("GET", uri, true);
 	    xhr.send();
-	    for (i=1;i<10000;i++){};
-	    //var xmlDocument = xhr.responseXML;
-
-		document.getElementById('rech_div').innerHTML = xhr.responseText;*/
-		document.getElementById('rechFrame').src = uri;
-		document.getElementById('rech_div').style.display="";
-		/*$.get(uri, function(ret){
-			//$("div#content").html(xml);
-			// filtrage
-			afficherNouvelleFenetre(ret);
-		});*/
 	}
 }
 
