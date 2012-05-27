@@ -22,6 +22,8 @@
 
 					<?php echo $this->Form->input('size', array('label' => 'Taille', 'type' => 'text')); ?>	
 
+					<?php echo $this->Form->input('Acteurs.Acteurs'); ?> 
+
 				</td>
 
 				<!-- Jaquette, etc. -->

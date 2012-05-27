@@ -69,6 +69,7 @@ class VideosController extends AppController{
 	function admin_edit($id = null){
 		// Pour charger la liste des formats dans la prochaine page
 		$this->set('formats', $this->Video->Format->find('list'));
+		$this->set('acteurs', $this->Video->Acteurs->find('list'));
 		$this->set('webroot', $this->webroot);
 
 		if($this->request->is('put') || $this->request->is('post')){	// Vrai quand du contenu a été modifié ou ajouté(cf /lib/Cake/Network/CakeRequest.php)

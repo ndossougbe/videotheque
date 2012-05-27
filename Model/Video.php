@@ -9,12 +9,24 @@ class Video extends AppModel{
 			'required'	=> true,
 			'message'	=> "Le nom ne doit pas être vide."
 		),
-		'size' => 'numeric'
+		'size' => array(
+			'rule' => 'numeric',
+			'required' => false,
+			'allowEmpty' => true
+
+		)
+
 	);
 
 	// many to one
-	public $belongsTo = array('Format');
-
+	public $belongsTo = 'Format';
+	public $hasAndBelongsToMany = array(
+        'Acteurs' =>
+            array(
+                'className'              => 'Personne',
+                'joinTable'              => 'personnes_videos_acteurs'
+            )
+    );
 
 	public function sizeValidation($check){
 		if(empty($this->data['Video']['format']) && !isset($this->data['Video']['format']))
