@@ -2,6 +2,7 @@
 	<div class="page-header">
 		<h1>Editer une page</h1>
 	</div>
+	<?php echo debug($this->request->data) ?>
 	<?php echo $this->Form->create('Video',array('class' => 'form-horizontal well')); ?>
 		<?php echo $this->Form->input('id'); ?> 
 
@@ -22,8 +23,23 @@
 
 					<?php echo $this->Form->input('size', array('label' => 'Taille', 'type' => 'text')); ?>	
 
-					<?php echo $this->Form->input('Acteurs.Acteurs'); ?> 
+					<?php echo $this->Form->input('Video.Acteurs',array(
+						'type' 					=> 'textarea',
+						'rows' 					=> 2,
+						'data-provide' 	=> 'typeahead',
+						'data-source' 	=> $this->request->data['lstActeurs'],
+						'data-mode' 		=> 'multiple',
+						'data-items'		=> '10'
+					)); ?> 
 
+					<?php echo $this->Form->input('Video.Acteurs',array(
+						'type' 					=> 'textarea',
+						'rows' 					=> 2,
+						'data-provide' 	=> 'typeahead',
+						'data-source' 	=> '["bleh","doh"]',
+						'data-mode' 		=> 'multiple',
+						'data-items'		=> '10'
+					)); ?> 
 				</td>
 
 				<!-- Jaquette, etc. -->
@@ -70,11 +86,8 @@
 	<?php echo $this->Form->end(); ?>
 </div>
 
-<!-- <div id="rech_div" style="display: none;"> -->
-	<!-- TODO: Popin? -->
-	<!-- <iframe src="" width="100%" height="800" name="rechFrame" id="rechFrame"></iframe>
-</div> -->
-
 <!-- JavaScript -->
-<?php echo $this->Html->script('admin',array('inline' => false)); ?>
 <?php echo $this->Html->script('bootstrap-modal',array('inline' => false)); ?>
+<?php echo $this->Html->script('bootstrap-typeahead',array('inline' => false)); ?>
+
+<?php echo $this->Html->script('admin',array('inline' => false)); ?>

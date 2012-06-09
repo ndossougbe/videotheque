@@ -12,6 +12,13 @@ window.onbeforeunload = verifJaquette;
 
 function verifJaquette(){
 	//"Verif Jaquette todo"
+	// n'est pas une url et a changé mais pas de sauvegarde => on supprime la copie de la jaquette sur le serveur.
+}
+
+function typeaheadMatcher(){
+	alert(this.query);
+	// bleh 
+	return true;
 }
 
 function infosLien(url){

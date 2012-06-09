@@ -4,7 +4,7 @@ class VideosController extends AppController{
 	/* Liste des modèles utilisés dans ce contrôleur. Par défaut, le
 	 * modèle utilisé est XXX pour XXXsController
 	 */
-	public $uses = array('Video');
+	public $uses = array('Video','Personne');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
 	
 		/* Condition de projection*/
@@ -16,7 +16,24 @@ class VideosController extends AppController{
 		/* Condition de sélection: find('all',array(
 			'conditions' => array('format' => 1)
 		));*/
-		//Convention: $d => tableau des variables envoyées à la vue (display)
+	//Convention: $d => tableau des variables envoyées à la vue (display)
+
+	private function format_textarea($array){
+		$ret = array();
+		foreach ($array as $k => $v) {
+			if(gettype($v) == 'array'){
+				$ret[] = $v['name'];	
+			}
+			else{
+				$ret[] = "'".$v."'";
+			}
+			
+		}
+		return implode(', ',$ret);
+	}
+
+
+
 	
 	function index(){
 		// Règles de pagination, définies ici localement. Mettre au début du ctrl pour global.
@@ -81,6 +98,16 @@ class VideosController extends AppController{
 			// charge data avec les données de la vidéo dont l'id est passé en paramètre
 			$this->Video->id = $id;
 			$this->request->data = $this->Video->read();
+			$this->request->data['Video']['Acteurs'] = $this->format_textarea($this->request->data['Acteurs']);
+
+			// formatage du tableau pour bien passer dans le typeahead.
+			$ret = array();
+			foreach ($this->Personne->find('list') as $k => $v) {
+				$ret[] = '"'.$v.'"' ;
+			}
+
+			$this->request->data['test'] = array("un","deux","trois");
+			$this->request->data['lstActeurs'] = "[".implode(', ',$ret)."]";
 		}
 	}
 
@@ -145,6 +172,10 @@ class VideosController extends AppController{
 		$this->set('url',urldecode($this->request->query['url']));
 		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
 		$this->render('popup');
+	}
+
+	public function truc(){
+		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
 	}
 }
 ?>
