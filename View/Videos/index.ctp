@@ -28,8 +28,9 @@
 
 	<?php foreach ($videos as $k => $v): $v = current($v); ?>
 	<tr>
+		<?php debug($v) ?>
 		<td><?php echo $v['id'] ?></td>
-		<td><?php echo $this->Html->link($v['name'],$v['link']);?></td>
+		<td><?php echo $this->Html->link($v['name'],array('action' => 'show', $v['id']));?></td>
 		<td><?php echo $videos[$k]['Format']['name'] ?></td>
 		<?php if ($admin): ?>
 		<td>

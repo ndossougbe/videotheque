@@ -76,6 +76,11 @@ class VideosController extends AppController{
 		$this->render('index');
 	}
 
+	function admin_show($id = null){
+		$this->show($id);
+		$this->render('show');
+	}
+
 	function admin_delete($id){
 		// Message de notifications. Utilise le template View/Elements/notif.ctp
 		$this->Session->setFlash('La vidéo a bien été supprimée. (!Commentée!)','notif'); 

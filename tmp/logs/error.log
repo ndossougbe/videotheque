@@ -849,3 +849,115 @@
 #1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
 #2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2012-06-16 19:49:51 Error: [MissingConnectionException] Database connection "SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)" is missing, or could not be created.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Datasource/DboSource.php(244): Mysql->connect()
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Model/ConnectionManager.php(98): DboSource->__construct(Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Model.php(3214): ConnectionManager::getDataSource('default')
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Model.php(1023): Model->setDataSource('default')
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Model.php(3238): Model->setSource('videos')
+#5 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Model.php(2460): Model->getDataSource()
+#6 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Component/PaginatorComponent.php(172): Model->find('all', Array)
+#7 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(1025): PaginatorComponent->paginate('Video', Array, Array)
+#8 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(44): Controller->paginate('Video')
+#9 [internal function]: VideosController->index()
+#10 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#11 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#12 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#13 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2012-06-16 20:06:30 Error: [MissingTableException] Database table personnes for model Acteurs was not found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Model.php(3238): Model->setSource('personnes')
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Datasource/DboSource.php(1026): Model->getDataSource()
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Model/Model.php(2460): DboSource->read(Object(Video), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Component/PaginatorComponent.php(172): Model->find('all', Array)
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(1025): PaginatorComponent->paginate('Video', Array, Array)
+#5 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(44): Controller->paginate('Video')
+#6 [internal function]: VideosController->index()
+#7 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#8 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#9 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#10 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2012-06-16 20:13:55 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-06-16 20:14:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-06-16 20:16:15 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-06-16 20:16:26 Error: [MissingActionException] Action VideosController::admin_show() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-06-16 20:17:59 Error: [NotFoundException] ID nul
+#0 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(80): VideosController->show()
+#1 [internal function]: VideosController->admin_show()
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#5 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-06-16 20:18:34 Error: [MissingControllerException] Controller class VideoController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-06-16 20:18:52 Error: [MissingActionException] Action VideosController::admin_1() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-06-16 20:20:19 Error: [NotFoundException] ID nul
+#0 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(80): VideosController->show()
+#1 [internal function]: VideosController->admin_show()
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#5 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-06-16 20:21:53 Error: [NotFoundException] ID nul
+#0 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(80): VideosController->show()
+#1 [internal function]: VideosController->admin_show()
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#5 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-06-16 20:22:00 Error: [NotFoundException] ID nul
+#0 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(80): VideosController->show()
+#1 [internal function]: VideosController->admin_show('i1')
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#5 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-06-16 20:22:04 Error: [NotFoundException] ID nul
+#0 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(80): VideosController->show()
+#1 [internal function]: VideosController->admin_show('1')
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#5 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-06-16 20:23:04 Error: [NotFoundException] ID nul
+#0 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(80): VideosController->show(NULL)
+#1 [internal function]: VideosController->admin_show()
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#5 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2012-06-16 20:26:14 Error: [MissingActionException] Action VideosController::admin() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-06-16 20:26:32 Error: [NotFoundException] ID nul
+#0 /opt/lampp/htdocs/videotheque/app/Controller/VideosController.php(80): VideosController->show(NULL)
+#1 [internal function]: VideosController->admin_show()
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(473): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#4 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#5 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}

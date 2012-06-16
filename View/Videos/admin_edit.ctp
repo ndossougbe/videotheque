@@ -31,15 +31,6 @@
 						'data-mode' 		=> 'multiple',
 						'data-items'		=> '10'
 					)); ?> 
-
-					<?php echo $this->Form->input('Video.Acteurs',array(
-						'type' 					=> 'textarea',
-						'rows' 					=> 2,
-						'data-provide' 	=> 'typeahead',
-						'data-source' 	=> '["bleh","doh"]',
-						'data-mode' 		=> 'multiple',
-						'data-items'		=> '10'
-					)); ?> 
 				</td>
 
 				<!-- Jaquette, etc. -->
