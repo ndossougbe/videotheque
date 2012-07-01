@@ -31,6 +31,23 @@
 						'data-mode' 		=> 'multiple',
 						'data-items'		=> '10'
 					)); ?> 
+
+					<?php echo $this->Form->input('director', array(
+						'label' => 'Réalisateur',
+						'data-provide' 	=> 'typeahead',
+						'data-source' 	=> $this->request->data['lstActeurs']
+					)); ?>	
+
+					<?php echo $this->Form->input('Video.Categories',array(
+						'type' 					=> 'textarea',
+						'rows' 					=> 2,
+						'data-provide' 	=> 'typeahead',
+						'data-source' 	=> $this->request->data['lstCategories'],
+						'data-mode' 		=> 'multiple',
+						'data-items'		=> '10'
+					)); ?> 
+
+					<?php echo $this->Form->input('nationality', array('label' => 'Nationalité')); ?>	
 				</td>
 
 				<!-- Jaquette, etc. -->

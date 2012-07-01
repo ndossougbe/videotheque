@@ -4,7 +4,7 @@ class VideosController extends AppController{
 	/* Liste des modèles utilisés dans ce contrôleur. Par défaut, le
 	 * modèle utilisé est XXX pour XXXsController
 	 */
-	public $uses = array('Video','Personne');
+	public $uses = array('Video','Personne','Categorie');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
 	
 		/* Condition de projection*/
@@ -95,6 +95,7 @@ class VideosController extends AppController{
 		$this->set('webroot', $this->webroot);
 
 		if($this->request->is('put') || $this->request->is('post')){	// Vrai quand du contenu a été modifié ou ajouté(cf /lib/Cake/Network/CakeRequest.php)
+			debug($this->request->data);
 			if($this->Video->save($this->request->data)){
 				$this->Session->setFlash('La vidéo a bien été modifiée.','notif'); 
 				$this->redirect(array('action' => 'index'));
@@ -104,15 +105,21 @@ class VideosController extends AppController{
 			$this->Video->id = $id;
 			$this->request->data = $this->Video->read();
 			$this->request->data['Video']['Acteurs'] = $this->format_textarea($this->request->data['Acteurs']);
+			$this->request->data['Video']['CategoriesVids'] = $this->format_textarea($this->request->data['CategoriesVids']);
 
 			// formatage du tableau pour bien passer dans le typeahead.
-			$ret = array();
+			$lstActeurs = array();
 			foreach ($this->Personne->find('list') as $k => $v) {
-				$ret[] = '"'.$v.'"' ;
+				$lstActeurs[] = '"'.$v.'"' ;
 			}
 
-			$this->request->data['test'] = array("un","deux","trois");
-			$this->request->data['lstActeurs'] = "[".implode(', ',$ret)."]";
+			$lstCategories = array();
+			foreach ($this->Categorie->find('list') as $k => $v) {
+				$lstCategories[] = '"'.$v.'"' ;
+			}
+
+			$this->request->data['lstActeurs'] = "[".implode(', ',$lstActeurs)."]";
+			$this->request->data['lstCategories'] = "[".implode(', ',$lstCategories)."]";
 		}
 	}
 
@@ -177,10 +184,6 @@ class VideosController extends AppController{
 		$this->set('url',urldecode($this->request->query['url']));
 		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
 		$this->render('popup');
-	}
-
-	public function truc(){
-		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
 	}
 }
 ?>

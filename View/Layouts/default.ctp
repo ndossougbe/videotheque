@@ -17,8 +17,8 @@ $cakeDescription = __d('cake_dev', 'Videothèque');
     <meta name="author" content="">
 
 	<!-- Fichiers.less: pas un fichier.css, il faut l'inclure comme ceci: -->
-	<link rel="stylesheet/less" href="<?php echo $this->Html->url('/less/style.less'); ?>"/>
   <link rel="stylesheet/less" href="<?php echo $this->Html->url('/less/bootstrap.less'); ?>"/>
+  <link rel="stylesheet/less" href="<?php echo $this->Html->url('/less/style.less'); ?>"/>
 	<?php
 		echo $this->Html->meta('icon');
 		echo $this->Html->script('less');

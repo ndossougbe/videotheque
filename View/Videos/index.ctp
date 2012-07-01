@@ -3,7 +3,17 @@
 		$admin = true;
 	}else{
 		$admin = false;
-	}	
+	}
+
+	function outputcsv($array){
+		$ret = "";
+		foreach ($array as $k => $v) {
+			$ret = $ret.$v["name"];
+			if($k != sizeof($array) - 1) $ret = $ret.", ";
+		}
+		return $ret;
+	}
+
 ?>
 
 <div class="page-header">
@@ -16,32 +26,68 @@
 
 <table class="table table-striped">
 	<thead>
-		<th>ID</th>
 		<th>Titre</th>
 		<th>Format</th>
-
+		<th>Genre</th>
 		<?php if ($admin): ?>
 			<th>Actions</th>	
 		<?php endif ?>
 		
 	</thead>
 
-	<?php foreach ($videos as $k => $v): $v = current($v); ?>
+
+	<?php foreach ($videos as $k => $v): ?>
 	<tr>
-		<?php debug($v) ?>
-		<td><?php echo $v['id'] ?></td>
-		<td><?php echo $this->Html->link($v['name'],array('action' => 'show', $v['id']));?></td>
-		<td><?php echo $videos[$k]['Format']['name'] ?></td>
+		<td><?php
+		echo $this->Html->link($v['Video']['name'], array('action' => 'show', $v['Video']['id']), array(
+			'rel'					=> 'popover',
+			'data-content'			=> '
+				<div class="bleh">
+					<table>
+						<tbody>
+							<td>'.$this->Html->image($v['Video']["cover"] ,array("style" => "max-width: 200px")).'</td>
+							<td>
+								<h4>Synopsis:</h4>
+								<p style="width:500px;">'.$v['Video']["synopsis"].'</p>
+								<h4>Avec:</h4>
+								<p>'.outputcsv($v["Acteurs"]).'</p>
+							</td>
+						</tbody>
+					</table>
+					
+				</div>	
+			',
+			'data-placement'		=> 'bottom',
+		), null);
+		?></td>
+
+
+		<td><?php echo $v['Format']['name'] ?></td>
+
+
+		<td><?php echo outputcsv($v['CategoriesVids']); ?></td>
+
 		<?php if ($admin): ?>
 		<td>
-			<?php echo $this->Html->link("Editer", array('action' => 'edit', $v['id'])); ?> -
+			<?php echo $this->Html->link("Editer", array('action' => 'edit', $v['Video']['id'])); ?> -
 
 			<!-- Fait apparaître une popup de confirmation -->
-			<?php echo $this->Html->link("Supprimer", array('action' => 'delete', $v['id']),null,'Voulez vous vraiment supprimer cette entrée?'); ?>
+			<?php echo $this->Html->link("Supprimer", array('action' => 'delete', $v['Video']['id']),null,'Voulez vous vraiment supprimer cette entrée?'); ?>
 		</td>
 		<?php endif ?>
 	</tr>
 	<?php endforeach; ?>
 </table>
 
+<a href="#" id="truc" class="btn btn-danger" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">hover for popover</a>
+
+
 <?php echo $this->Paginator->numbers() ?>
+<?php echo $this->Html->script('bootstrap-tooltip',array('inline' => false)); ?>
+<?php echo $this->Html->script('bootstrap-popover',array('inline' => false)); ?>
+
+<?php 
+	$this->Html->scriptStart(array('inline'=>false));
+	echo "$('a[rel=popover]').popover();";
+	$this->Html->scriptEnd();
+?>

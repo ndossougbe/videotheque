@@ -25,7 +25,12 @@ class Video extends AppModel{
             array(
                 'className'              => 'Personne',
                 'joinTable'              => 'personnes_videos_acteurs'
-            )
+            ),
+		'CategoriesVids' =>
+			array(
+			    'className'              => 'Categorie',
+			    'joinTable'              => 'categories_videos'
+			)
     );
 
 	public function sizeValidation($check){
@@ -50,11 +55,10 @@ class Video extends AppModel{
 	 * générer les infos à passer lorsqu'on veut afficher un lien.
 	 * (cf Html helper, link)
 	 */
-	public function afterFind($data){
-/*
-		$search = explode(",","ç,æ,œ,á,é,í,ó,ú,à,è,ì,ò,ù,ä,ë,ï,ö,ü,ÿ,â,ê,î,ô,û,å,e,i,ø,u, ");
-		$replace = explode(",","c,ae,oe,a,e,i,o,u,a,e,i,o,u,a,e,i,o,u,y,a,e,i,o,u,a,e,i,o,u,_");
-*/
+	/*public function afterFind($data){
+
+		//$search = explode(",","ç,æ,œ,á,é,í,ó,ú,à,è,ì,ò,ù,ä,ë,ï,ö,ü,ÿ,â,ê,î,ô,û,å,e,i,ø,u, ");
+		//$replace = explode(",","c,ae,oe,a,e,i,o,u,a,e,i,o,u,a,e,i,o,u,y,a,e,i,o,u,a,e,i,o,u,_");
 	
 		foreach($data as $k=>$d){
 			if(isset($d['Video']['id']) && isset($d['Video']['name'])){
@@ -67,11 +71,11 @@ class Video extends AppModel{
 			$data[$k] = $d;
 		}
 		return $data;
-	}
+	}*/
 
 	public function beforeSave(){
 		debug($this->data);
-		//die();
+		die();
 		return true;
 	}
 }
