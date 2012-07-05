@@ -6,6 +6,14 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 		$(this).parent().find('.error-message').remove();
 	});
 
+	// Ajax bla bla @TODO
+	$('a.ajax').on('click', function(){
+		$.get($(this).attr('href')+'/'+ $('#url'), {}, function(data) {
+			alert(data);
+		});
+		return false;
+	});
+
 });
 
 window.onbeforeunload = verifJaquette;

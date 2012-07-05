@@ -6,6 +6,8 @@ class VideosController extends AppController{
 	 */
 	public $uses = array('Video','Personne','Categorie');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
+
+	//private $component = array('AllocineParser');
 	
 		/* Condition de projection*/
 		/*$q=$this->Video->find('all',array(
@@ -184,6 +186,11 @@ class VideosController extends AppController{
 		$this->set('url',urldecode($this->request->query['url']));
 		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
 		$this->render('popup');
+	}
+
+	public function admin_ajaxParse($id_video){
+		$this->AllocineParser = $this->Components->load('AllocineParser');
+		$this->set($this->AllocineParser->parse($id_video));
 	}
 }
 ?>

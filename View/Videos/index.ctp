@@ -79,8 +79,6 @@
 	<?php endforeach; ?>
 </table>
 
-<a href="#" id="truc" class="btn btn-danger" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">hover for popover</a>
-
 
 <?php echo $this->Paginator->numbers() ?>
 <?php echo $this->Html->script('bootstrap-tooltip',array('inline' => false)); ?>

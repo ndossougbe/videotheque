@@ -15,6 +15,7 @@
 						<a class="btn" data-toggle="modal" href="#search_modal" onclick="rechercheAllocine('<?php echo $webroot; ?>');">
 							<i class='icon-search'></i> Chercher sur Allociné
 						</a>
+						<?php echo $this->Html->link("Bleh", array('action' => 'ajaxParse'),array('class' => 'ajax')); ?>
 					</div>
 
 					<?php echo $this->Form->input('url', array('label' => 'Lien')); ?>
@@ -86,6 +87,17 @@
 			    <h3>Résultats de la recherche</h3>
 			  </div>
 			  <div class="modal-body" id="resultats"></div>
+			  <div class="modal-footer">
+			    <a href="#" class="btn" data-dismiss="modal">Fermer</a>
+			  </div>
+		</div>
+
+		<div class="modal hide" id="parse_modal">
+			<div class="modal-header">
+			    <button class="close" data-dismiss="modal">&times;</button>
+			    <h3>Bleh</h3>
+			  </div>
+			  <div class="modal-body" id="resultats2"></div>
 			  <div class="modal-footer">
 			    <a href="#" class="btn" data-dismiss="modal">Fermer</a>
 			  </div>
