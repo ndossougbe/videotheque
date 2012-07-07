@@ -24,7 +24,7 @@
 
 					<?php echo $this->Form->input('size', array('label' => 'Taille', 'type' => 'text')); ?>	
 
-					<?php echo $this->Form->input('Video.Acteurs',array(
+					<?php echo $this->Form->input('Video.Actors',array(
 						'type' 					=> 'textarea',
 						'rows' 					=> 2,
 						'data-provide' 	=> 'typeahead',

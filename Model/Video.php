@@ -21,7 +21,7 @@ class Video extends AppModel{
 	// many to one
 	public $belongsTo = 'Format';
 	public $hasAndBelongsToMany = array(
-        'Acteurs' =>
+        'Actors' =>
             array(
                 'className'              => 'Personne',
                 'joinTable'              => 'personnes_videos_acteurs'

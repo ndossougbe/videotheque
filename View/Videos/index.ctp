@@ -42,7 +42,7 @@
 		echo $this->Html->link($v['Video']['name'], array('action' => 'show', $v['Video']['id']), array(
 			'rel'					=> 'popover',
 			'data-content'			=> '
-				<div class="bleh">
+				<div>
 					<table>
 						<tbody>
 							<td>'.$this->Html->image($v['Video']["cover"] ,array("style" => "max-width: 200px")).'</td>
@@ -50,11 +50,10 @@
 								<h4>Synopsis:</h4>
 								<p>'.$v['Video']["synopsis"].'</p>
 								<h4>Avec:</h4>
-								<p>'.outputcsv($v["Acteurs"]).'</p>
+								<p>'.outputcsv($v["Actors"]).'</p>
 							</td>
 						</tbody>
 					</table>
-					
 				</div>	
 			',
 			'data-placement'		=> 'bottom',

@@ -7,9 +7,12 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 	});
 
 	// Ajax bla bla @TODO
-	$('a.ajax').on('click', function(){
-		$.get($(this).attr('href')+'/'+ $('#url'), {}, function(data) {
-			alert(data);
+	$('a.ajax,button.ajax').on('click', function(){
+		var id_video = $('#VideoUrl').val().match(/cfilm=((\d*))\.html/)[1];
+		console.log("idvideo: " + id_video);
+		$.get($(this).attr('href')+'/'+ id_video, {}, function(data) {
+			$('div.container')[0].innerHTML = data;
+			loadFields(data);
 		});
 		return false;
 	});
@@ -17,6 +20,25 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 });
 
 window.onbeforeunload = verifJaquette;
+
+
+function loadFields(videoInfo){
+	console.log(typeof(videoInfo));
+	var infoJSON = jQuery.parseJSON(videoInfo);
+	console.log("loadFields");
+	console.log(infoJSON);
+	console.log(infoJSON.title);
+
+	var field;
+	for (var fieldName in infoJSON){
+		if( infoJSON.hasOwnProperty(fieldName)){
+			field = $('#'+fieldName);
+			if(field != null) field.val(infoJSON[fieldName]);
+		}
+	}
+
+	$('#VideoActeurs').val(infoJSON.actors);
+}
 
 function verifJaquette(){
 	//"Verif Jaquette todo"

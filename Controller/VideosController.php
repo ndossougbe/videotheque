@@ -93,7 +93,7 @@ class VideosController extends AppController{
 	function admin_edit($id = null){
 		// Pour charger la liste des formats dans la prochaine page
 		$this->set('formats', $this->Video->Format->find('list'));
-		$this->set('acteurs', $this->Video->Acteurs->find('list'));
+		$this->set('acteurs', $this->Video->Actors->find('list'));
 		$this->set('webroot', $this->webroot);
 
 		if($this->request->is('put') || $this->request->is('post')){	// Vrai quand du contenu a été modifié ou ajouté(cf /lib/Cake/Network/CakeRequest.php)
@@ -106,7 +106,7 @@ class VideosController extends AppController{
 			// charge data avec les données de la vidéo dont l'id est passé en paramètre
 			$this->Video->id = $id;
 			$this->request->data = $this->Video->read();
-			$this->request->data['Video']['Acteurs'] = $this->format_textarea($this->request->data['Acteurs']);
+			$this->request->data['Video']['Actors'] = $this->format_textarea($this->request->data['Actors']);
 			$this->request->data['Video']['CategoriesVids'] = $this->format_textarea($this->request->data['CategoriesVids']);
 
 			// formatage du tableau pour bien passer dans le typeahead.
@@ -190,13 +190,7 @@ class VideosController extends AppController{
 
 	public function admin_ajaxParse($id_video){
 		$this->AllocineParser = $this->Components->load('AllocineParser');
-		$d = array();
-		$d['a'] = $this->AllocineParser->parse($id_video);
-		// TODO: transformer en JSON
-
-
-		$this->set($d);
-		debug($d['a']);
+		echo json_encode($this->AllocineParser->parse($id_video));
 	}
 }
 ?>
