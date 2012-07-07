@@ -48,7 +48,7 @@
 							<td>'.$this->Html->image($v['Video']["cover"] ,array("style" => "max-width: 200px")).'</td>
 							<td>
 								<h4>Synopsis:</h4>
-								<p style="width:500px;">'.$v['Video']["synopsis"].'</p>
+								<p>'.$v['Video']["synopsis"].'</p>
 								<h4>Avec:</h4>
 								<p>'.outputcsv($v["Acteurs"]).'</p>
 							</td>

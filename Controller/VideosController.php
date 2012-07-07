@@ -190,7 +190,13 @@ class VideosController extends AppController{
 
 	public function admin_ajaxParse($id_video){
 		$this->AllocineParser = $this->Components->load('AllocineParser');
-		$this->set($this->AllocineParser->parse($id_video));
+		$d = array();
+		$d['a'] = $this->AllocineParser->parse($id_video);
+		// TODO: transformer en JSON
+
+
+		$this->set($d);
+		debug($d['a']);
 	}
 }
 ?>
