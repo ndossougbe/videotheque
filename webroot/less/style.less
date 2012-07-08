@@ -1,13 +1,27 @@
+@labelWidth: 100px;
+@labelPadding: 20px;
+
 .input{
 	label{
-		padding-right: 20px;
-		width: 100px;
+		padding-right: @labelPadding;
+		width: @labelWidth;
 		text-align: right;
 
 		display: inline-block;
+
+		.blockLabel{
+			display: block;
+		}
+	}
+
+	.defaultWidth{
+		width: auto;
 	}
 }
 
+span.help-block{
+	padding-left: @labelWidth + @labelPadding;
+}
 
 .popover-inner{
 	width: auto;
@@ -17,4 +31,10 @@
 	min-height:100px;
 	max-height:50%;
 	
+}
+
+// Hotfix
+
+select#VideoReleasedateMonth{
+	width: 105px;
 }

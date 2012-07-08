@@ -5,16 +5,34 @@ class Video extends AppModel{
 	/** Règles de validation lors d'une création ou mise à jour*/ 
 	public $validate = array(
 		'name' => array(
-			'rule'		=> "notEmpty",
-			'required'	=> true,
-			'message'	=> "Le nom ne doit pas être vide."
+			'rule'		 => "notEmpty",
+			'required'	 => true,
+			'message'	 => "Le titre ne doit pas être vide."
 		),
-		'size' => array(
-			'rule' => 'numeric',
-			'required' => false,
-			'allowEmpty' => true
-
-		)
+		'releaseDate' => array(
+			'rule'       => array('date','dmy'),
+			'required'   => false,
+			'allowEmpty' => true,
+			'message'	 => "Le format de date est incorrect."
+		),
+		'duration' => array(
+			'rule'       => 'time',
+			'required'   => false,
+			'allowEmpty' => true,
+			'message'	 => "Le format est incorrect."
+		),
+		'rating' => array(
+			'rule'       => array('decimal','1'),
+			'required'   => false,
+			'allowEmpty' => true,
+			'message'	 => "Le format est incorrect."
+		),
+		'cover' => array(
+			'rule'       => array('extension',array('png','gif','jpg','jpeg')),
+			'required'   => false,
+			'allowEmpty' => true,
+			'message'	 => "Formats d'image acceptés: png, gif, jpg, jpeg."
+		),
 
 	);
 
@@ -32,22 +50,6 @@ class Video extends AppModel{
 			    'joinTable'              => 'categories_videos'
 			)
     );
-
-	public function sizeValidation($check){
-		if(empty($this->data['Video']['format']) && !isset($this->data['Video']['format']))
-			return false;
-		
-		$format = $this->data['Video']['format'];
-		if($format == 2){
-			$check['size'] = null;
-			return true;
-		} else{
-			if(empty($check['size']) || !isset($check['size'])){
-				return false;
-			}
-			return true;
-		}
-	}
 
 
 	/**
@@ -74,8 +76,8 @@ class Video extends AppModel{
 	}*/
 
 	public function beforeSave(){
-		debug($this->data);
-		die();
+		// debug($this->data);
+		// die();
 		return true;
 	}
 }

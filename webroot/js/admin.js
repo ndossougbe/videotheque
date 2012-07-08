@@ -6,84 +6,19 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 		$(this).parent().find('.error-message').remove();
 	});
 
-	// Ajax bla bla @TODO
-	$('a.ajax,button.ajax').on('click', function(){
-		var id_video = $('#VideoUrl').val().match(/cfilm=((\d*))\.html/)[1];
-		console.log("idvideo: " + id_video);
-		$.get($(this).attr('href')+'/'+ id_video, {}, function(data) {
-			$('div.container')[0].innerHTML = data;
-			loadFields(data);
-		});
-		return false;
-	});
-
 });
 
 window.onbeforeunload = verifJaquette;
-
-
-function loadFields(videoInfo){
-	console.log(typeof(videoInfo));
-	var infoJSON = jQuery.parseJSON(videoInfo);
-	console.log("loadFields");
-	console.log(infoJSON);
-	console.log(infoJSON.title);
-
-	var field;
-	for (var fieldName in infoJSON){
-		if( infoJSON.hasOwnProperty(fieldName)){
-			field = $('#'+fieldName);
-			if(field != null) field.val(infoJSON[fieldName]);
-		}
-	}
-
-	$('#VideoActeurs').val(infoJSON.actors);
-}
 
 function verifJaquette(){
 	//"Verif Jaquette todo"
 	// n'est pas une url et a changé mais pas de sauvegarde => on supprime la copie de la jaquette sur le serveur.
 }
 
-function typeaheadMatcher(){
-	alert(this.query);
-	// bleh 
-	return true;
-}
-
-function infosLien(url){
-	document.getElementById('VideoUrl').value = 'http://allocine.fr' + url;
-	retour();
-	return false; // Pour éviter de suivre les liens.
-}
-
-
 function trim (str){
 	return str.replace(/^\s+/g,'').replace(/\s+$/g,'');
 } 
 
-
-function rechercheAllocine(webroot){
-	
-	var toFind = document.getElementById('VideoName').value;
-	if(toFind != null && (toFind = toFind.trim()) != ""){
-		// %2B = échappement du caractère '+'
-		toFind = toFind.replace(/ /g,'%2B'); // On remplace les espaces par '+'
-		var uri = webroot+"scrap.php?q="+toFind;
-
-		var xhr = new XMLHttpRequest();
-
-		xhr.onreadystatechange = function() {
-			//alert(xhr.readyState + " " + xhr.status);
-			if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-				document.getElementById('resultats').innerHTML = xhr.responseText;
-			}
-		};
-
-	    xhr.open("GET", uri, true);
-	    xhr.send();
-	}
-}
 
 function afficherNouvelleFenetre(str) {
 	var WinPrint = window.open('', '', 'width=450,height=600,toolbar=0,scrollbars=0,status=0');
@@ -106,7 +41,7 @@ function actualiserAffiche(url){
 	var src;
 	if(url.match(/^http:\/\/*/g)) src = url;
 	else src = '/videotheque/img/' + url;
-	document.getElementById('affiche').src = src;
+	document.getElementById('CoverPreview').src = src;
 	document.getElementById('VideoCover').value = url;
 }
 

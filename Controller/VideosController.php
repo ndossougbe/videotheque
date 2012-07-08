@@ -6,8 +6,6 @@ class VideosController extends AppController{
 	 */
 	public $uses = array('Video','Personne','Categorie');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
-
-	//private $component = array('AllocineParser');
 	
 		/* Condition de projection*/
 		/*$q=$this->Video->find('all',array(
@@ -90,6 +88,31 @@ class VideosController extends AppController{
 		$this->redirect($this->referer()); // redirige sur la page appelante.
 	}
 
+
+	function saveVideo($data){
+		$video = $data['Video'];
+		
+
+		// Traitement acteurs et réalisateur
+		$data['Video']['Actors'] = explode(',',$video['Actors']);
+
+		// Traitement catégories
+		$data['Video']['CategoriesVids'] = explode(',',$video['Categories']);
+
+
+		// Traitement nationalité
+
+		// Traiment cover? online vs local?
+
+		// Traitement Note
+		$data['Video']['rating'] = str_replace(',','.',$video['rating']);		
+
+		debug($data);
+		//die();
+		return $this->Video->save($data);
+	}
+
+
 	function admin_edit($id = null){
 		// Pour charger la liste des formats dans la prochaine page
 		$this->set('formats', $this->Video->Format->find('list'));
@@ -97,10 +120,10 @@ class VideosController extends AppController{
 		$this->set('webroot', $this->webroot);
 
 		if($this->request->is('put') || $this->request->is('post')){	// Vrai quand du contenu a été modifié ou ajouté(cf /lib/Cake/Network/CakeRequest.php)
-			debug($this->request->data);
-			if($this->Video->save($this->request->data)){
+			if($this->saveVideo($this->request->data)){
 				$this->Session->setFlash('La vidéo a bien été modifiée.','notif'); 
 				$this->redirect(array('action' => 'index'));
+				return;
 			}
 		}elseif($id != null){
 			// charge data avec les données de la vidéo dont l'id est passé en paramètre
@@ -108,21 +131,20 @@ class VideosController extends AppController{
 			$this->request->data = $this->Video->read();
 			$this->request->data['Video']['Actors'] = $this->format_textarea($this->request->data['Actors']);
 			$this->request->data['Video']['CategoriesVids'] = $this->format_textarea($this->request->data['CategoriesVids']);
-
-			// formatage du tableau pour bien passer dans le typeahead.
-			$lstActeurs = array();
-			foreach ($this->Personne->find('list') as $k => $v) {
-				$lstActeurs[] = '"'.$v.'"' ;
-			}
-
-			$lstCategories = array();
-			foreach ($this->Categorie->find('list') as $k => $v) {
-				$lstCategories[] = '"'.$v.'"' ;
-			}
-
-			$this->request->data['lstActeurs'] = "[".implode(', ',$lstActeurs)."]";
-			$this->request->data['lstCategories'] = "[".implode(', ',$lstCategories)."]";
 		}
+		// formatage du tableau pour bien passer dans le typeahead.
+		$lstActeurs = array();
+		foreach ($this->Personne->find('list') as $k => $v) {
+			$lstActeurs[] = '"'.$v.'"' ;
+		}
+
+		$lstCategories = array();
+		foreach ($this->Categorie->find('list') as $k => $v) {
+			$lstCategories[] = '"'.$v.'"' ;
+		}
+
+		$this->request->data['lstActeurs'] = "[".implode(', ',$lstActeurs)."]";
+		$this->request->data['lstCategories'] = "[".implode(', ',$lstCategories)."]";
 	}
 
 	public function admin_addimg($id_video = null){
@@ -188,9 +210,16 @@ class VideosController extends AppController{
 		$this->render('popup');
 	}
 
-	public function admin_ajaxParse($id_video){
+	public function admin_ajaxParse($video_id){
 		$this->AllocineParser = $this->Components->load('AllocineParser');
-		echo json_encode($this->AllocineParser->parse($id_video));
+		echo json_encode($this->AllocineParser->parse($video_id));
+	}
+
+	public function admin_ajaxAllocineSearch($video_title){
+		$this->AllocineParser = $this->Components->load('AllocineParser');
+		$this->autoRender = false;
+		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
+		echo $this->AllocineParser->searchResults($video_title);
 	}
 }
 ?>

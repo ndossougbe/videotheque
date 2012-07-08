@@ -8,31 +8,46 @@ class AllocineParserComponent extends Component {
 			'director'     => 'VideoDirector',
 			'genre'        => 'VideoCategories',
 			'nationality'  => 'VideoNationality',
-			'datePublished'=> 'VideoReleaseDate',
+			'datePublished'=> 'VideoReleasedate',
 			'duration'     => 'VideoDuration',
-			'rating'       => 'VideoRating'
+			'rating'       => 'VideoRating',
+			'description'  => 'VideoSynopsis',
+			'poster'       => 'VideoCover'
 		);
 
 
-
-	public function getHtml($id, $page){
+	public function getHtml($query, $page){
 		$url = '';
 
 		switch ($page) {
 			case 'general':
-				$url = 'http://www.allocine.fr/film/fichefilm_gen_cfilm='.$id.'.html';
+				$url = 'http://www.allocine.fr/film/fichefilm_gen_cfilm='.$query.'.html';
 				break;
 			
 			case 'casting':
-				$url = 'http://www.allocine.fr/film/fichefilm-'.$id.'/casting/';
+				$url = 'http://www.allocine.fr/film/fichefilm-'.$query.'/casting/';
 				break;
 
+			case 'search':
+				$url = "http://www.allocine.fr/recherche/?q=".str_replace(' ','+',$query); 
+				break;
 
 			default:
 				return null;
 		}
 
 		return file_get_html($url);
+	}
+
+
+	public function searchResults($searchString){
+		$html = $this->getHtml($searchString,'search');
+		$ret = $html->find('div.vmargin10t',0);
+		foreach($ret->find('a') as $a){
+		    $a->onclick = "videoLinkSelected('http://allocine.fr".$a->href."'); return false;";
+		}
+		return $ret;
+
 	}
 
 
@@ -43,6 +58,8 @@ class AllocineParserComponent extends Component {
 		$html = $this->getHtml($id,'general');
 
 		$ret[$this->fieldNames['title']] = trim($html->find('div#title',0)->find('span',0)->innertext);
+		$ret[$this->fieldNames['description']] = trim($html->find('p[itemprop=description]',0)->innertext);
+		$ret[$this->fieldNames['poster']] = trim($html->find('div.poster',0)->find('img[itemprop=image]',0)->src);
 
 
 		$html = $html->find('div.data_box',0);
@@ -56,20 +73,31 @@ class AllocineParserComponent extends Component {
 					break;
 				
 				case 'Date de sortie':
-					$ret[$this->fieldNames['datePublished']] = trim($v->find('span[itemprop=datePublished]',0)->innertext);
-					$ret[$this->fieldNames['duration']] = trim($v->find('span[itemprop=duration]',0)->innertext);
+					$relDate = strtotime(trim($v->find('span[itemprop=datePublished]',0)->content));
+
+					$ret[$this->fieldNames['datePublished'].'Year'] = date("Y", $relDate);
+					$ret[$this->fieldNames['datePublished'].'Month'] = date("m", $relDate);
+					$ret[$this->fieldNames['datePublished'].'Day'] = date("d", $relDate);
+
+					$duration = trim($v->find('span[itemprop=duration]',0)->innertext);
+					// on passe l'heure du format H'h 'MM'mins' en HH:MM
+					$duration = strtotime('0'.str_replace('h ',':',str_replace('min','',$duration)));
+					
+					$ret[$this->fieldNames['duration'].'Hour'] = date("H", $duration);
+					$ret[$this->fieldNames['duration'].'Min'] = date("i", $duration);
 					break;
 
 				case 'Nationalité':
 					// Lien remplacé par un span quand on parse... wtf?
 					$nationalityLink = $v->find('a|span.acLnk',0);
 					$ret[$this->fieldNames['nationality']] = trim($nationalityLink->innertext);
-					//$ret['nationality']['label'] = $nationalityLink->innertext;
+
 
 
 					// Etape gourmande (Chargement d'une page supplémentaire) et pas indispensable.
 					// TODO: enlever?
 					//$countryPage = file_get_html('allocine.fr'.$nationalityLink->href);
+					//$ret['nationality']['label'] = $nationalityLink->innertext;
 					//$ret['nationality']['country'] = $countryPage->find('div.titlebar')->first_child->innertext;
 					break;
 

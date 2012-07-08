@@ -1,7 +1,7 @@
 <?php
 class AppController extends Controller{
 
-	var $components = array('RequestHandler');
+	var $components = array('RequestHandler','Session');
 
 	// fonction exécutée avant les autres (show, menu, etc.)
 	function beforeFilter(){
