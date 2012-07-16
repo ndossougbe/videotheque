@@ -4,7 +4,7 @@ App::import('Vendor','simple_html_dom');
 class AllocineParserComponent extends Component {
 	private $fieldNames = array(
 			'title'        => 'VideoName',
-			'actors'       => 'VideoActors',
+			'actors'       => 'VideoActeurs',
 			'director'     => 'VideoDirector',
 			'genre'        => 'VideoCategories',
 			'nationality'  => 'VideoNationality',
@@ -29,14 +29,21 @@ class AllocineParserComponent extends Component {
 				break;
 
 			case 'search':
-				$url = "http://www.allocine.fr/recherche/?q=".str_replace(' ','+',$query); 
+				$url = "http://www.allocine.fr/recherche?q=".str_replace(' ','+',$query); 
 				break;
 
 			default:
 				return null;
 		}
 
-		return file_get_html($url);
+		$ctx = stream_context_create(array( 
+		    'http' => array( 
+		        'timeout' => 60
+		        ) 
+		    ) 
+		); 
+
+		return file_get_html($url, false, $ctx);
 	}
 
 
@@ -106,6 +113,7 @@ class AllocineParserComponent extends Component {
 			}
 		}
 
+		// TODO note x 4 pour être noté sur 20
 		$ret[$this->fieldNames['rating']] =  trim($html->find('span.note',0)->innertext);
 
 		// Infos de la fiche casting

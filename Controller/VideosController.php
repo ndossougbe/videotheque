@@ -4,7 +4,7 @@ class VideosController extends AppController{
 	/* Liste des modèles utilisés dans ce contrôleur. Par défaut, le
 	 * modèle utilisé est XXX pour XXXsController
 	 */
-	public $uses = array('Video','Personne','Categorie');
+	public $uses = array('Video','Personne','Category');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
 	
 		/* Condition de projection*/
@@ -18,13 +18,13 @@ class VideosController extends AppController{
 		));*/
 	//Convention: $d => tableau des variables envoyées à la vue (display)
 
-	private function format_textarea($array){
+	private function format_textarea($array, $list=false){
 		$ret = array();
 		foreach ($array as $k => $v) {
 			if(gettype($v) == 'array'){
 				$ret[] = $v['name'];	
 			}
-			else{
+			else if($list){
 				$ret[] = "'".$v."'";
 			}
 			
@@ -90,33 +90,100 @@ class VideosController extends AppController{
 
 
 	function saveVideo($data){
-		$video = $data['Video'];
-		
-
-		// Traitement acteurs et réalisateur
-		$data['Video']['Actors'] = explode(',',$video['Actors']);
-
-		// Traitement catégories
-		$data['Video']['CategoriesVids'] = explode(',',$video['Categories']);
-
-
-		// Traitement nationalité
 
 		// Traiment cover? online vs local?
 
 		// Traitement Note
-		$data['Video']['rating'] = str_replace(',','.',$video['rating']);		
+		$rating = str_replace(',','.',$data['Video']['rating']);
+		// TODO passage 2.2 règle le problème de refus de 1 au lieu de 1.O
+		// TODO twitter bootstrap pour setter les identifiants au moment de la sélection
+		//	du réalisateur et de la nationalité.
+		$data['Video']['rating'] = $rating;
+	
+		$this->Video->saveAssociated($data);
 
-		debug($data);
-		//die();
-		return $this->Video->save($data);
+
+		//// Associations
+
+		// Traitement acteurs
+		$actors = explode(',',$data['Video']['Acteurs']);
+		$data['Video']['Acteurs'] = array();
+
+		$actorArray = array();
+		foreach ($actors as $k => $v) {
+			$actor = array();
+			$v = trim($v);
+			if($v != ''){
+				$actor['Video'] = array('id' => $data['Video']['id']);
+
+				$tmp = $this->Personne->find('first', array('conditions' => array('Personne.name' => $v)));
+				if($tmp != null){
+					$actor['Personne'] = $tmp['Personne']; 
+				}else{
+					$this->Personne->create();
+					$actor['Personne'] = array('name' => $v);	
+				}
+				$actorArray[] = $actor;
+			}
+		}
+		$this->Personne->saveAll($actorArray);
+
+		// Traitement réalisateur
+		// $directorName = trim($data['Video']['director']);
+		// if( $directorName != ''){
+		// 	$tmp = $this->Personne->find('first', array('conditions' => array('Personne.name' => $directorName)));
+		// 	if($tmp != null){
+		// 		$director = $tmp['Personne']; 
+		// 	}else{
+		// 		$director = array('name' => $directorName);	
+		// 	}
+		// }else{
+		// 	$director = '';
+		// }
+		
+
+		// $a = array(
+		// 	'Movie' => array('id' => $data['Video']['id'], 'director_id' => $director['id']),
+		// 	'Personne' => $director
+		// );
+		// debug($a);
+		// // Use the following to avoid validation errors:
+		// unset($this->Personne->Movie->validate['director_id']);
+
+		// $this->Personne->saveAssociated($a);
+
+		
+
+		// Traitement catégories
+		$categories = explode(',',$data['Video']['Categories']);
+		$categoryArray = array();
+		foreach ($categories as $k => $v) {
+			$category = array();
+			$v = trim($v);
+			if($v != ''){
+				$category['Video'] = array('id' => $data['Video']['id']);
+
+				$tmp = $this->Category->find('first', array('conditions' => array('Category.name' => $v)));
+				if($tmp != null){
+					$category['Category'] = $tmp['Category']; 
+				}else{
+					$this->Category->create();
+					$category['Category'] = array('name' => $v);	
+				}
+				$categoryArray[] = $category;
+			}
+		}
+		$this->Category->saveAll($categoryArray);
+
+
+		return false;
 	}
 
 
 	function admin_edit($id = null){
 		// Pour charger la liste des formats dans la prochaine page
 		$this->set('formats', $this->Video->Format->find('list'));
-		$this->set('acteurs', $this->Video->Actors->find('list'));
+		$this->set('acteurs', $this->Video->Personne->find('list'));
 		$this->set('webroot', $this->webroot);
 
 		if($this->request->is('put') || $this->request->is('post')){	// Vrai quand du contenu a été modifié ou ajouté(cf /lib/Cake/Network/CakeRequest.php)
@@ -129,8 +196,9 @@ class VideosController extends AppController{
 			// charge data avec les données de la vidéo dont l'id est passé en paramètre
 			$this->Video->id = $id;
 			$this->request->data = $this->Video->read();
-			$this->request->data['Video']['Actors'] = $this->format_textarea($this->request->data['Actors']);
-			$this->request->data['Video']['CategoriesVids'] = $this->format_textarea($this->request->data['CategoriesVids']);
+			debug($this->request->data);
+			$this->request->data['Video']['Acteurs'] = $this->format_textarea($this->request->data['Personne']);
+			$this->request->data['Video']['Categories'] = $this->format_textarea($this->request->data['Category']);
 		}
 		// formatage du tableau pour bien passer dans le typeahead.
 		$lstActeurs = array();
@@ -139,7 +207,7 @@ class VideosController extends AppController{
 		}
 
 		$lstCategories = array();
-		foreach ($this->Categorie->find('list') as $k => $v) {
+		foreach ($this->Category->find('list') as $k => $v) {
 			$lstCategories[] = '"'.$v.'"' ;
 		}
 

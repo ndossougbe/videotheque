@@ -2,12 +2,10 @@
 
 class Personne extends AppModel{
 	
-	public $hasAndBelongsToMany = array(
-        'EstActeur' =>
-            array(
-                'className'              => 'Video',
-                'joinTable'              => 'personnes_videos_acteurs'
-            )
-    );
+	public $hasAndBelongsToMany = array('Video');
+	public $hasMany = array('Movie' => array(
+		'className' => 'Video',
+		'foreignKey' => 'director_id'
+	));
 }
 ?>

@@ -3,7 +3,7 @@
 		<h1>Editer une vidéo</h1>
 	</div>
 
-	<?php debug($this->request->data) ?>
+	<?php //debug($this->request->data) ?>
 	<?php echo $this->Form->create('Video',array('class' => 'form-horizontal well')); ?>
 		<?php echo $this->Form->input('id'); ?> 
 
@@ -29,7 +29,7 @@
 
 					<?php echo $this->Form->input('format_id'); ?>
 
-					<?php echo $this->Form->input('Video.Actors',array(
+					<?php echo $this->Form->input('Video.Acteurs',array(
 						'type' 					=> 'textarea',
 						'rows' 					=> 2,
 						'data-provide' 	=> 'typeahead',
@@ -38,8 +38,9 @@
 						'data-items'		=> '10'
 					)); ?> 
 
-					<?php echo $this->Form->input('director', array(
+					<?php echo $this->Form->input('Director.name', array(
 						'label' => 'Réalisateur',
+						'autocomplete' => 'off',
 						'data-provide' 	=> 'typeahead',
 						'data-source' 	=> $this->request->data['lstActeurs']
 					)); ?>	
@@ -53,7 +54,7 @@
 						'data-items'	=> '10'
 					)); ?> 
 
-					<?php echo $this->Form->input('nationality', array('label' => 'Nationalité')); ?>	
+					<?php echo $this->Form->input('Country.nationality', array('label' => 'Nationalité')); ?>	
 
 					<?php echo $this->Form->input('rating', array('label' => 'Note', 'type' => 'text')); ?>	
 

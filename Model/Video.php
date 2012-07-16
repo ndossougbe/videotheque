@@ -37,19 +37,11 @@ class Video extends AppModel{
 	);
 
 	// many to one
-	public $belongsTo = 'Format';
+	public $belongsTo = array('Format','Director' => array('className' => 'Personne'),'Country');
 	public $hasAndBelongsToMany = array(
-        'Actors' =>
-            array(
-                'className'              => 'Personne',
-                'joinTable'              => 'personnes_videos_acteurs'
-            ),
-		'CategoriesVids' =>
-			array(
-			    'className'              => 'Categorie',
-			    'joinTable'              => 'categories_videos'
-			)
-    );
+        'Personne',
+		'Category'
+	);
 
 
 	/**

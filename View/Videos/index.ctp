@@ -5,13 +5,18 @@
 		$admin = false;
 	}
 
-	function outputcsv($array){
-		$ret = "";
+	function outputcsv($array, $list=false){
+		$ret = array();
 		foreach ($array as $k => $v) {
-			$ret = $ret.$v["name"];
-			if($k != sizeof($array) - 1) $ret = $ret.", ";
+			if(gettype($v) == 'array'){
+				$ret[] = $v['name'];	
+			}
+			else if($list){
+				$ret[] = "'".$v."'";
+			}
+			
 		}
-		return $ret;
+		return implode(', ',$ret);
 	}
 
 ?>
@@ -24,6 +29,15 @@
 	<?php endif ?>
 </div>
 
+
+<?php echo $this->Form->create('Video',array('class' => 'form-horizontal well')); ?>
+<!-- TODO form de recherche -->
+Titre<input type='text' />
+<?php echo $this->Form->end('Rechercher'); ?>
+
+
+<table style="width:100%;"><tbody><tr>
+<td style="width:70%;">
 <table class="table table-striped">
 	<thead>
 		<th>Titre</th>
@@ -35,6 +49,7 @@
 		
 	</thead>
 
+	<?php //debug($videos) ?>
 
 	<?php foreach ($videos as $k => $v): ?>
 	<tr>
@@ -50,7 +65,7 @@
 								<h4>Synopsis:</h4>
 								<p>'.$v['Video']["synopsis"].'</p>
 								<h4>Avec:</h4>
-								<p>'.outputcsv($v["Actors"]).'</p>
+								<p>'.outputcsv($v["Personne"]).'</p>
 							</td>
 						</tbody>
 					</table>
@@ -64,7 +79,7 @@
 		<td><?php echo $v['Format']['name'] ?></td>
 
 
-		<td><?php echo outputcsv($v['CategoriesVids']); ?></td>
+		<td><?php echo outputcsv($v['Category']); ?></td>
 
 		<?php if ($admin): ?>
 		<td>
@@ -76,6 +91,27 @@
 		<?php endif ?>
 	</tr>
 	<?php endforeach; ?>
+</table>
+
+			</td>
+			<td style="width:30%;">
+				<div class="well" id="PreviewDiv">
+					<div align="center">
+						<img id="PreviewCover" src="/videotheque/img/covers/jaquette_indisponible.png" style="max-width: 200px" id="CoverPreview" alt="">
+					</div>
+					<h4>Synopsis:</h4>
+					<p id="PreviewSynopsis">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<h4>Avec:</h4>
+					<p if="PreviewCasting">Toto titi, machin truc, bidule chose.</p>
+				</div>
+			</td>
+		</tr>
+	</tbody>
 </table>
 
 
