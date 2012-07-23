@@ -1779,3 +1779,19 @@
 #13 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(89): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
 #14 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #15 {main}
+2012-07-23 21:13:57 Error: Fatal Error (1): Call to undefined method stdClass::find() in [/opt/lampp/htdocs/videotheque/app/Controller/Component/AllocineParserComponent.php, line 54]
+2012-07-23 21:13:57 Error: [FatalErrorException] Call to undefined method stdClass::find()
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/opt/lampp/htdo...', 54)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/opt/lampp/htdo...', 54, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/opt/lampp/htdo...', 54, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-23 21:15:14 Error: Fatal Error (1): Call to undefined method stdClass::find() in [/opt/lampp/htdocs/videotheque/app/Controller/Component/AllocineParserComponent.php, line 54]
+2012-07-23 21:15:14 Error: [FatalErrorException] Call to undefined method stdClass::find()
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/opt/lampp/htdo...', 54)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/opt/lampp/htdo...', 54, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/opt/lampp/htdo...', 54, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

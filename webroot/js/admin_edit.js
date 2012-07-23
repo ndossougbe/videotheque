@@ -1,17 +1,20 @@
 jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 
-	$('#SearchBtn').on('click', function(){
-		console.log('Search with string: ' + $('#VideoName').val());
-		$('#search_modal').modal('show'); // Cachée dans linkSelected_Action
-		$('#SearchResults').html(gifLoader());
-		
-		$.get($(this).attr('href')+'/'+ $('#VideoName').val(), {}, function(data) {
-			console.log($('#SearchResults'));
-			$('#SearchResults').html(data);
-		});
-		return false;
-	});
+	//$('#SearchBtn').on('click', searchAction);
 });
+
+function searchAction(){
+	console.log('Search with string: ' + $('#VideoSearch').val());
+	$('#search_modal').modal('show'); // Cachée dans linkSelected_Action
+	$('#SearchResults').html(gifLoader());
+	
+	$.get($('#SearchBtn').attr('href')+'/'+ $('#VideoSearch').val(), {}, function(data) {
+		console.log($('#SearchResults'));
+		$('#SearchResults').html(data);
+	});
+	return false;
+}
+
 
 function gifLoader(){
 	return '<div align="center"><img src="/videotheque/img/ajax-loader.gif" style="width:100px;"></div>';

@@ -11,14 +11,14 @@
 ?>
 
 
-<?php echo $this->Html->link($cakeDescription, '/',array('class' => 'brand'));?>
+<?php echo $this->Html->link($cakeDescription, '/',array('class' => 'brand', 'tabindex' => -1));?>
 <div class="nav-collapse">
 	<ul class="nav">
-		<li><?php echo $this->Html->link("Accueil", '/'); ?></li>
-		<li><?php echo $this->Html->link("Catalogue", array('action' => 'index', 'controller' => 'videos'));?></li>
+		<li><?php echo $this->Html->link("Accueil", '/', array('tabindex' => -1)); ?></li>
+		<li><?php echo $this->Html->link("Catalogue", array('action' => 'index', 'controller' => 'videos'), array('tabindex' => -1));?></li>
 
 		<?php if ($admin): ?>
-			<li><?php echo $this->Html->link("Ajouter une vidéo", array('controller' => 'videos','action' => 'edit')); ?></li>	
+			<li><?php echo $this->Html->link("Ajouter une vidéo", array('controller' => 'videos','action' => 'edit'), array('tabindex' => -1)); ?></li>	
 		<?php endif ?>
 	</ul>
 </div><!--/.nav-collapse -->

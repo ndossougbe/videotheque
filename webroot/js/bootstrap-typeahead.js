@@ -46,7 +46,9 @@
         this.selections.push(val)
         val = this.selections.join(this.formatteddelimiter()) + this.formatteddelimiter()
       }
-      this.$element.val( val )
+      this.$element
+        .val( val )
+        .change()
       return this.hide()
     }
 

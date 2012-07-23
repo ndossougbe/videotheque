@@ -30,15 +30,15 @@
 </div>
 
 
-<?php echo $this->Form->create('Video',array('class' => 'form-horizontal well')); ?>
+<?php echo $this->Form->create('Video',array('class' => 'form-search well')); ?>
 <!-- TODO form de recherche -->
-Titre<input type='text' />
-<?php echo $this->Form->end('Rechercher'); ?>
+Titre<input type='text' class='search-query'/>
+<?php echo $this->Form->end(array('label' => 'Rechercher',  'div'=>false)); ?>
 
 
 <table style="width:100%;"><tbody><tr>
 <td style="width:70%;">
-<table class="table table-striped">
+<table class="table table-striped" id='VideoTable'>
 	<thead>
 		<th>Titre</th>
 		<th>Format</th>
@@ -53,31 +53,14 @@ Titre<input type='text' />
 
 	<?php foreach ($videos as $k => $v): ?>
 	<tr>
-		<td><?php
-		echo $this->Html->link($v['Video']['name'], array('action' => 'show', $v['Video']['id']), array(
-			'rel'					=> 'popover',
-			'data-content'			=> '
-				<div>
-					<table>
-						<tbody>
-							<td>'.$this->Html->image($v['Video']["cover"] ,array("style" => "max-width: 200px")).'</td>
-							<td>
-								<h4>Synopsis:</h4>
-								<p>'.$v['Video']["synopsis"].'</p>
-								<h4>Avec:</h4>
-								<p>'.outputcsv($v["Personne"]).'</p>
-							</td>
-						</tbody>
-					</table>
-				</div>	
-			',
-			'data-placement'		=> 'bottom',
-		), null);
-		?></td>
-
+		<td>
+			<?php echo $this->Html->link($v['Video']['name']
+				, array('action' => 'show', $v['Video']['id'])
+				, array('class' => 'VideoLink', 'data-id' => $v['Video']['id'])
+			);?>
+		</td>
 
 		<td><?php echo $v['Format']['name'] ?></td>
-
 
 		<td><?php echo outputcsv($v['Category']); ?></td>
 
@@ -94,7 +77,7 @@ Titre<input type='text' />
 </table>
 
 			</td>
-			<td style="width:30%;">
+			<td style="width:30%; height:600px">
 				<div class="well" id="PreviewDiv">
 					<div align="center">
 						<img id="PreviewCover" src="/videotheque/img/covers/jaquette_indisponible.png" style="max-width: 200px" id="CoverPreview" alt="">
@@ -116,6 +99,9 @@ Titre<input type='text' />
 
 
 <?php echo $this->Paginator->numbers() ?>
+<?php echo $this->Html->script('index',array('inline' => false)); ?>
+
+<!--
 <?php echo $this->Html->script('bootstrap-tooltip',array('inline' => false)); ?>
 <?php echo $this->Html->script('bootstrap-popover',array('inline' => false)); ?>
 
@@ -124,3 +110,4 @@ Titre<input type='text' />
 	echo "$('a[rel=popover]').popover();";
 	$this->Html->scriptEnd();
 ?>
+-->

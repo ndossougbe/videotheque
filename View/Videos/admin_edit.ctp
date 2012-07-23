@@ -3,6 +3,22 @@
 		<h1>Editer une vidéo</h1>
 	</div>
 
+	<?php echo $this->Form->create('Video',array('default' => false,'class' => 'form-search well', 'onsubmit' => 'searchAction();')); ?>
+	<input type='text' class='input-medium search-query' id='VideoSearch'/>
+	<?php echo $this->Html->link(
+							'<i class="icon-search"></i> Chercher sur Allociné'
+							, array('action' => 'ajaxAllocineSearch')
+							, array(
+									'id'            => 'SearchBtn'
+								, 'class'         => 'btn'
+								, 'escape'        => false
+								, 'data-toggle'   => 'modal'
+								, 'onclick'				=> 'return searchAction()'
+							)
+						);?>
+	<?php echo $this->Form->end(); ?>
+
+
 	<?php //debug($this->request->data) ?>
 	<?php echo $this->Form->create('Video',array('class' => 'form-horizontal well')); ?>
 		<?php echo $this->Form->input('id'); ?> 
@@ -11,19 +27,7 @@
 			<tr>
 				<td style="width:60%;">
 					<!-- Infos générales	 -->
-					<div class="control-group">
-						<?php echo $this->Form->input('name', array('label' => 'Titre', 'div' => array('style' => 'display: inline;')) ); ?>
-						<?php echo $this->Html->link(
-							"<i class='icon-search'></i> Chercher sur Allociné", 
-							array('action' => 'ajaxAllocineSearch'),
-							array(
-								'id'            => "SearchBtn",
-								'class'         => 'btn', 
-								'escape'        => false,
-								'data-toggle'   => "modal",
-							)
-						);?>
-					</div>
+					<?php echo $this->Form->input('name', array('label' => 'Titre') ); ?>
 
 					<?php echo $this->Form->input('url', array('label' => 'Lien')); ?>
 
@@ -56,7 +60,7 @@
 
 					<?php echo $this->Form->input('Country.nationality', array('label' => 'Nationalité')); ?>	
 
-					<?php echo $this->Form->input('rating', array('label' => 'Note', 'type' => 'text')); ?>	
+					<?php echo $this->Form->input('rating', array('label' => 'Note (sur 20)', 'type' => 'text')); ?>	
 
 					<?php echo $this->Form->input('releasedate',array(
 						'label'         => "Date de sortie",

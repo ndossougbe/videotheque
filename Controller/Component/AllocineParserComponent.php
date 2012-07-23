@@ -5,9 +5,9 @@ class AllocineParserComponent extends Component {
 	private $fieldNames = array(
 			'title'        => 'VideoName',
 			'actors'       => 'VideoActeurs',
-			'director'     => 'VideoDirector',
+			'director'     => 'DirectorName',
 			'genre'        => 'VideoCategories',
-			'nationality'  => 'VideoNationality',
+			'nationality'  => 'CountryNationality',
 			'datePublished'=> 'VideoReleasedate',
 			'duration'     => 'VideoDuration',
 			'rating'       => 'VideoRating',
@@ -50,8 +50,10 @@ class AllocineParserComponent extends Component {
 	public function searchResults($searchString){
 		$html = $this->getHtml($searchString,'search');
 		$ret = $html->find('div.vmargin10t',0);
+		$ret->onLoad =  "$('a:first').focus()"; // TODO ne fonctionne pas.
 		foreach($ret->find('a') as $a){
 		    $a->onclick = "videoLinkSelected('http://allocine.fr".$a->href."'); return false;";
+		    $a->tabindex = "1";
 		}
 		return $ret;
 
@@ -114,7 +116,7 @@ class AllocineParserComponent extends Component {
 		}
 
 		// TODO note x 4 pour être noté sur 20
-		$ret[$this->fieldNames['rating']] =  trim($html->find('span.note',0)->innertext);
+		$ret[$this->fieldNames['rating']] =  4 * (float)trim($html->find('span.note',0)->innertext);
 
 		// Infos de la fiche casting
 		$html = $this->getHtml($id,'casting');

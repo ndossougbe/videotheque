@@ -4,7 +4,7 @@ class VideosController extends AppController{
 	/* Liste des modèles utilisés dans ce contrôleur. Par défaut, le
 	 * modèle utilisé est XXX pour XXXsController
 	 */
-	public $uses = array('Video','Personne','Category');
+	public $uses = array('Video','Personne','Category', 'Country');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
 	
 		/* Condition de projection*/
@@ -91,19 +91,39 @@ class VideosController extends AppController{
 
 	function saveVideo($data){
 
-		// Traiment cover? online vs local?
+		// debug($data);
+		// die();
+		// // Traiment cover? online vs local?
 
 		// Traitement Note
 		$rating = str_replace(',','.',$data['Video']['rating']);
 		// TODO passage 2.2 règle le problème de refus de 1 au lieu de 1.O
-		// TODO twitter bootstrap pour setter les identifiants au moment de la sélection
-		//	du réalisateur et de la nationalité.
 		$data['Video']['rating'] = $rating;
 	
-		$this->Video->saveAssociated($data);
+
+		// Traitement réalisateur
+		$directorName = trim($data['Director']['name']);
+		if( $directorName != ''){
+			$tmp = $this->Personne->find('first', array('conditions' => array('Personne.name' => $directorName)));
+			if($tmp != null){
+				$data['Director']['id'] = $tmp['Personne']['id']; 
+			}
+		}
+
+		// Traitement nationalité
+		$nationality = trim($data['Country']['nationality']);
+		if( $nationality != ''){
+			$tmp = $this->Country->find('first', array('conditions' => array('Country.nationality' => $nationality)));
+			if($tmp != null){
+				$data['Country']['id'] = $tmp['Country']['id']; 
+			}
+		}
+
+		// Sauvegarde de la vidéo et des association belongsTo.
+		if(!$this->Video->saveAssociated($data)) return false;
 
 
-		//// Associations
+		//// Associations HABTM
 
 		// Traitement acteurs
 		$actors = explode(',',$data['Video']['Acteurs']);
@@ -126,33 +146,7 @@ class VideosController extends AppController{
 				$actorArray[] = $actor;
 			}
 		}
-		$this->Personne->saveAll($actorArray);
-
-		// Traitement réalisateur
-		// $directorName = trim($data['Video']['director']);
-		// if( $directorName != ''){
-		// 	$tmp = $this->Personne->find('first', array('conditions' => array('Personne.name' => $directorName)));
-		// 	if($tmp != null){
-		// 		$director = $tmp['Personne']; 
-		// 	}else{
-		// 		$director = array('name' => $directorName);	
-		// 	}
-		// }else{
-		// 	$director = '';
-		// }
-		
-
-		// $a = array(
-		// 	'Movie' => array('id' => $data['Video']['id'], 'director_id' => $director['id']),
-		// 	'Personne' => $director
-		// );
-		// debug($a);
-		// // Use the following to avoid validation errors:
-		// unset($this->Personne->Movie->validate['director_id']);
-
-		// $this->Personne->saveAssociated($a);
-
-		
+		if(!$this->Personne->saveAll($actorArray)) return false;
 
 		// Traitement catégories
 		$categories = explode(',',$data['Video']['Categories']);
@@ -173,10 +167,10 @@ class VideosController extends AppController{
 				$categoryArray[] = $category;
 			}
 		}
-		$this->Category->saveAll($categoryArray);
+		if(!$this->Category->saveAll($categoryArray)) return false;
 
 
-		return false;
+		return true;
 	}
 
 
@@ -196,7 +190,6 @@ class VideosController extends AppController{
 			// charge data avec les données de la vidéo dont l'id est passé en paramètre
 			$this->Video->id = $id;
 			$this->request->data = $this->Video->read();
-			debug($this->request->data);
 			$this->request->data['Video']['Acteurs'] = $this->format_textarea($this->request->data['Personne']);
 			$this->request->data['Video']['Categories'] = $this->format_textarea($this->request->data['Category']);
 		}

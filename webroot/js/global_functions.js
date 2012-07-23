@@ -5,7 +5,7 @@ function clearCurrentLink(node){
     var links = node.getElementsByTagName("A");
     for(var i = 0; i < links.length; i++){
 		if(links[i].href == window.location.href.split("#")[0]){
-            console.log(links[i]);
+            //console.log(links[i]);
             links[i].parentNode.className = "active";
             //removeNode(links[i]);
         }
