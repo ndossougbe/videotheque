@@ -36,14 +36,42 @@ class VideosController extends AppController{
 
 	
 	function index(){
+
+		debug($this->request->data);
+		// Filtrage
+		$conditions = array();
+
+		if( !empty($this->request->data) ){
+			$search = $this->request->data['Search'];
+			$conditions['Video.name LIKE'] = '%'.$search['name'].'%';	
+
+			if($search['advanced']){
+				$conditions['Video.format_id'] = $search['format'];
+			}
+		}
+		
+
 		// Règles de pagination, définies ici localement. Mettre au début du ctrl pour global.
-		// défaut: 20
 		$this->paginate = array('Video' => array(
-			'limit' => 10	
+			'conditions' => $conditions
+			//,'limit' => 10	
 		));
 		$d['videos'] = $this->Paginate('Video');
+		$d['formats'] = $this->Video->Format->find('list');
 		$this->set($d);
-		$this->set('formats', $this->Video->Format->find('list'));
+	}
+
+	function ajaxPreview($id){
+		$this->Video->id = $id;
+		$video = $this->Video->read();
+
+		$ret = array(
+			'cover'      => $video['Video']['cover']
+			, 'name'     => $video['Video']['name']
+			, 'synopsis' => $video['Video']['synopsis']
+			, 'casting'  => $this->format_textarea($video['Personne'])
+		);
+		echo json_encode($ret);
 	}
 	
 	function menu(){

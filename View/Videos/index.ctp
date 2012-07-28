@@ -30,14 +30,22 @@
 </div>
 
 
-<?php echo $this->Form->create('Video',array('class' => 'form-search well')); ?>
-<!-- TODO form de recherche -->
-Titre<input type='text' class='search-query'/>
-<?php echo $this->Form->end(array('label' => 'Rechercher',  'div'=>false)); ?>
+<?php echo $this->Form->create('Search',array('class' => 'form-search well')); ?>
+
+<?php echo $this->Form->input('advanced',array('type' => 'hidden', 'value' => '0')); ?> 
+
+<?php echo $this->Form->input('name',array('label' => 'Recherche ', 'placeholder' => 'Titre')); ?>
+
+<?php echo $this->Html->link("Recherche avancée", '#', array('onclick' => 'toggleAdvancedSearch(); return false;')); ?>
+<div id="AdvancedSearchDiv" class='hide'>
+	<?php echo $this->Form->input('format',array('label' => 'Format ')); ?>
+</div>
+
+<?php echo $this->Form->end(array('label' => 'Rechercher',  'div'=> array('class' => 'hide', 'id' => 'SearchSubmit'))); ?>
 
 
 <table style="width:100%;"><tbody><tr>
-<td style="width:70%;">
+<td style="width:70%; vertical-align: top;">
 <table class="table table-striped" id='VideoTable'>
 	<thead>
 		<th>Titre</th>
@@ -77,11 +85,12 @@ Titre<input type='text' class='search-query'/>
 </table>
 
 			</td>
-			<td style="width:30%; height:600px">
+			<td style="width:30%; height:600px; vertical-align:top;">
 				<div class="well" id="PreviewDiv">
 					<div align="center">
 						<img id="PreviewCover" src="/videotheque/img/covers/jaquette_indisponible.png" style="max-width: 200px" id="CoverPreview" alt="">
 					</div>
+					<h4 id='PreviewName'></h4>
 					<h4>Synopsis:</h4>
 					<p id="PreviewSynopsis">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -90,24 +99,16 @@ Titre<input type='text' class='search-query'/>
 					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 					<h4>Avec:</h4>
-					<p if="PreviewCasting">Toto titi, machin truc, bidule chose.</p>
+					<p id="PreviewCasting">Toto titi, machin truc, bidule chose.</p>
 				</div>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
+<?php echo $this->Html->link(""
+	, array('action' => 'ajaxPreview', 'controller' => 'videos', 'admin' => false)
+	, array('style' => 'visibility: none;', 'id' => 'PreviewUrl')); ?>
 
 <?php echo $this->Paginator->numbers() ?>
 <?php echo $this->Html->script('index',array('inline' => false)); ?>
-
-<!--
-<?php echo $this->Html->script('bootstrap-tooltip',array('inline' => false)); ?>
-<?php echo $this->Html->script('bootstrap-popover',array('inline' => false)); ?>
-
-<?php 
-	$this->Html->scriptStart(array('inline'=>false));
-	echo "$('a[rel=popover]').popover();";
-	$this->Html->scriptEnd();
-?>
--->

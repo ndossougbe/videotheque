@@ -1,12 +1,12 @@
-jQuery(function($){ // pour être sûr que jquery est chargé, etc.
+// jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 
-	// Permet d'enlever le style erreur lorsqu'on essaie de corriger un champ
-	$('.input.error input, .input.error textarea').focus(function(){
-		$(this).parent().removeClass('error');
-		$(this).parent().find('.error-message').remove();
-	});
+// 	// Permet d'enlever le style erreur lorsqu'on essaie de corriger un champ
+// 	$('.input.error input, .input.error textarea').focus(function(){
+// 		$(this).parent().removeClass('error');
+// 		$(this).parent().find('.error-message').remove();
+// 	});
 
-});
+// });
 
 window.onbeforeunload = verifJaquette;
 

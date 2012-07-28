@@ -12,7 +12,7 @@ class AppController extends Controller{
 
 		// Pas de layout sur les appels en ajax.
 		if($this->RequestHandler->isAjax()){
-
+			$this->autoRender = false;
 			$this->layout = null;
 		}
 	}

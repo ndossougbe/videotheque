@@ -1795,3 +1795,360 @@
 #3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2012-07-28 12:24:59 Error: [MissingControllerException] Controller class UndefinedController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 12:24:59 Error: [MissingControllerException] Controller class UndefinedController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 12:24:59 Error: [MissingControllerException] Controller class UndefinedController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 12:27:49 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 12:27:50 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 12:27:50 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 12:27:51 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 12:27:51 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 12:29:15 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 12:29:15 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 12:29:15 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 12:29:16 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 12:29:35 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 12:29:36 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 12:29:46 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 12:34:06 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 12:38:08 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 12:45:47 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 62]
+2012-07-28 12:45:47 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 62)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 62, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 62, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 12:45:49 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 62]
+2012-07-28 12:45:49 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 62)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 62, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 62, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 13:09:48 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 13:09:50 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 13:09:51 Error: [MissingActionException] Action VideosController::preview() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 13:10:31 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 63]
+2012-07-28 13:10:31 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 13:10:33 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 63]
+2012-07-28 13:10:33 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 13:11:15 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 63]
+2012-07-28 13:11:15 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 13:11:24 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 63]
+2012-07-28 13:11:24 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 13:11:25 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 63]
+2012-07-28 13:11:25 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 63, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 13:15:38 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 63]
+2012-07-28 13:15:39 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 63]
+2012-07-28 13:24:59 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:25:07 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:25:09 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:27:42 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:34:21 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:34:27 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:34:28 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:42:17 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:26 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:26 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:26 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:27 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:27 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:27 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:27 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:27 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:42:44 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:42:45 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:42:45 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:42:54 Error: [MissingViewException] View file "/opt/lampp/htdocs/videotheque/app/View/Videos/ajax_preview.ctp" is missing.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/View/View.php(472): View->_getViewFileName(NULL)
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(957): View->render(NULL, NULL)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(193): Controller->render()
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-07-28 13:45:17 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:45:18 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:45:19 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 13:50:24 Error: [MissingActionException] Action VideosController::admin_ven() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 13:50:44 Error: [MissingActionException] Action VideosController::admin_name:ven() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 13:50:48 Error: [MissingActionException] Action VideosController::name:ven() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 13:50:51 Error: [MissingActionException] Action VideosController::ven() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 14:04:28 Error: Fatal Error (4): syntax error, unexpected ')' in [/opt/lampp/htdocs/videotheque/app/Controller/VideosController.php, line 53]
+2012-07-28 14:05:22 Error: [MissingActionException] Action VideosController::covers() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 14:05:46 Error: [MissingActionException] Action VideosController::covers() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 14:12:35 Error: [MissingActionException] Action VideosController::covers() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 14:17:19 Error: [MissingActionException] Action VideosController::covers() could not be found.
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#2 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-07-28 14:21:26 Error: Fatal Error (4): syntax error, unexpected ';' in [/opt/lampp/htdocs/videotheque/app/View/Videos/index.ctp, line 38]
+2012-07-28 14:21:26 Error: [FatalErrorException] syntax error, unexpected ';'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 38)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 38, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 38, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 14:24:50 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 14:28:55 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 14:38:18 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 14:38:19 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 14:43:32 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 14:43:34 Error: [MissingControllerException] Controller class CoversController could not be found.
+#0 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-07-28 14:56:53 Error: Fatal Error (4): syntax error, unexpected ';' in [/opt/lampp/htdocs/videotheque/app/View/Videos/index.ctp, line 42]
+2012-07-28 14:56:53 Error: [FatalErrorException] syntax error, unexpected ';'
+#0 /opt/lampp/htdocs/videotheque/lib/Cake/Error/ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/opt/lampp/htdo...', 42)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/opt/lampp/htdo...', 42, Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/opt/lampp/htdo...', 42, Array)
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Core/App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-28 15:15:12 Error: [NotFoundException] ID nul
+#0 [internal function]: VideosController->show()
+#1 /opt/lampp/htdocs/videotheque/lib/Cake/Controller/Controller.php(485): ReflectionMethod->invokeArgs(Object(VideosController), Array)
+#2 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#3 /opt/lampp/htdocs/videotheque/lib/Cake/Routing/Dispatcher.php(161): Dispatcher->_invoke(Object(VideosController), Object(CakeRequest), Object(CakeResponse))
+#4 /opt/lampp/htdocs/videotheque/app/webroot/index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
