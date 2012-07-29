@@ -4,7 +4,7 @@ class VideosController extends AppController{
 	/* Liste des modèles utilisés dans ce contrôleur. Par défaut, le
 	 * modèle utilisé est XXX pour XXXsController
 	 */
-	public $uses = array('Video','Personne','Category', 'Country');
+	public $uses = array('Video','Personne','Category', 'Country', 'Actor', 'CategoriesVideo');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
 	
 		/* Condition de projection*/
@@ -18,50 +18,8 @@ class VideosController extends AppController{
 		));*/
 	//Convention: $d => tableau des variables envoyées à la vue (display)
 
-	private function format_textarea($array, $list=false){
-		$ret = array();
-		foreach ($array as $k => $v) {
-			if(gettype($v) == 'array'){
-				$ret[] = $v['name'];	
-			}
-			else if($list){
-				$ret[] = "'".$v."'";
-			}
-			
-		}
-		return implode(', ',$ret);
-	}
-
-
-
-	
-	function index(){
-
-		debug($this->request->data);
-		// Filtrage
-		$conditions = array();
-
-		if( !empty($this->request->data) ){
-			$search = $this->request->data['Search'];
-			$conditions['Video.name LIKE'] = '%'.$search['name'].'%';	
-
-			if($search['advanced']){
-				$conditions['Video.format_id'] = $search['format'];
-			}
-		}
-		
-
-		// Règles de pagination, définies ici localement. Mettre au début du ctrl pour global.
-		$this->paginate = array('Video' => array(
-			'conditions' => $conditions
-			//,'limit' => 10	
-		));
-		$d['videos'] = $this->Paginate('Video');
-		$d['formats'] = $this->Video->Format->find('list');
-		$this->set($d);
-	}
-
-	function ajaxPreview($id){
+	/// Fonctions ajax
+	public function ajaxPreview($id){
 		$this->Video->id = $id;
 		$video = $this->Video->read();
 
@@ -69,17 +27,104 @@ class VideosController extends AppController{
 			'cover'      => $video['Video']['cover']
 			, 'name'     => $video['Video']['name']
 			, 'synopsis' => $video['Video']['synopsis']
-			, 'casting'  => $this->format_textarea($video['Personne'])
+			, 'casting'  => $this->Actor->formatTextArea($video['Actor'])
 		);
 		echo json_encode($ret);
 	}
 	
-	function menu(){
+	public function admin_ajaxParse($video_id){
+		$this->AllocineParser = $this->Components->load('AllocineParser');
+		echo json_encode($this->AllocineParser->parse($video_id));
+	}
+
+	public function admin_ajaxAllocineSearch($video_title){
+		$this->AllocineParser = $this->Components->load('AllocineParser');
+		$this->autoRender = false;
+		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
+		echo $this->AllocineParser->searchResults($video_title);
+	}
+
+	/// Actions
+	public function index(){
+
+		// debug($this->request->data);
+		// Filtrage
+		$conditions = array();
+		$joins = array();
+
+		if( !empty($this->request->data) ){
+			$search = $this->request->data['Search'];
+			if($search['name']) $conditions['Video.name LIKE'] = '%'.$search['name'].'%';	
+
+			if($search['advanced']){
+				// Le choix neutre a pour valeur 0 <=> false <=> pas de condition supplémentaire.
+				if($search['format']) $conditions['Video.format_id'] = $search['format'];
+
+				// HABTM, c'est un peu plus compliqué:
+				if($search['category']){
+					$joins[] = array(
+							'table' => 'categories_videos'
+            , 'alias' => 'CategoriesVideo'
+            , 'type' => 'inner'
+            , 'foreignKey' => false
+            , 'conditions'=> array('CategoriesVideo.video_id = Video.id')
+					);
+					$conditions['CategoriesVideo.category_id'] = $search['category'];
+				}
+
+				
+				if($search['actor']){
+					$actors = $this->Personne->find('list',array(
+						'conditions' => array('Personne.name LIKE' => '%'.$search['actor'].'%')
+						, 'fields' => array('Personne.id')
+						, 'recursive' => -1 	// Pour ne pas aller checher les infos de videos et cie associés.
+					));
+					// debug($actors);
+					
+					$joins[] = array(
+							'table' => 'personnes_videos'
+            , 'alias' => 'PersonnesVideo'
+            , 'type' => 'inner'
+            , 'foreignKey' => false
+            , 'conditions'=> array('PersonnesVideo.video_id = Video.id')
+					);
+					$conditions['PersonnesVideo.personne_id'] = $actors;
+				}
+			}
+		}
+		
+		// Règles de pagination, définies ici localement. Mettre au début du ctrl pour global.
+		$this->paginate = array('Video' => array(
+				'conditions' => $conditions
+			, 'joins' => $joins
+			, 'fields' => array('DISTINCT Video.name', 'Video.format_id', 'Video.id', 'Format.name')
+			// ,'limit' => 2
+		));
+		$d['videos'] = $this->Paginate('Video');
+
+		foreach ($d['videos'] as $k => $v) {
+			$d['videos'][$k]['Video']['categories'] = $this->CategoriesVideo->formatTextArea($d['videos'][$k]['CategoriesVideo']);
+		}
+
+		// Aussi étrange que ça puisse paraître, cela met bien le deuxième tableau à la suite du premier.
+		$d['formats'] = array(0 => ' ------ ') + $this->Video->Format->find('list');
+		$d['categories'] = array(0 => ' ------ ') + $this->Category->find('list');
+		$d['lstActors'] = $this->Personne->find('typeahead');
+		// debug($d);
+		$this->set($d);
+	}
+
+	public function admin_index(){
+		$this->index();
+		$this->render('index');
+	}
+
+	public function menu(){
 		$videos = $this->Video->find('all',array('fields' => array('id','name')));
 		return $videos;
 	}
 	
-	function show($id = null){
+	public function show($id = null){
 		if(!$id)
 			throw new NotFoundException('ID nul');
 		
@@ -88,128 +133,33 @@ class VideosController extends AppController{
 		if(empty($video))
 			throw new NotFoundException('Aucune vidéo ne correspond à cet ID ('.$id.').');
 			
-/*
+		/*
 		if($slug != $video['Video']['link']['slug'])
 			//erreur 301: moved permanently. ex, dit à google que la page a été remplacée.
 			$this->redirect($video['Video']['link'],301);
-*/
+		*/
 			
 		// Une fois que les vérifs sont faites, on envoie l'objet
 		$d['video'] = current($video);
 		$this->set($d);
 	}
 
-	function admin_index(){
-		$this->index();
-		$this->render('index');
-	}
-
-	function admin_show($id = null){
+	public function admin_show($id = null){
 		$this->show($id);
 		$this->render('show');
 	}
 
-	function admin_delete($id){
+	public function admin_delete($id){
 		// Message de notifications. Utilise le template View/Elements/notif.ctp
-		$this->Session->setFlash('La vidéo a bien été supprimée. (!Commentée!)','notif'); 
-		//$this->Video->delete($id);
+		$this->Session->setFlash('La vidéo a bien été supprimée.','notif'); 
+		$this->Video->delete($id);
 		$this->redirect($this->referer()); // redirige sur la page appelante.
 	}
 
-
-	function saveVideo($data){
-
-		// debug($data);
-		// die();
-		// // Traiment cover? online vs local?
-
-		// Traitement Note
-		$rating = str_replace(',','.',$data['Video']['rating']);
-		// TODO passage 2.2 règle le problème de refus de 1 au lieu de 1.O
-		$data['Video']['rating'] = $rating;
-	
-
-		// Traitement réalisateur
-		$directorName = trim($data['Director']['name']);
-		if( $directorName != ''){
-			$tmp = $this->Personne->find('first', array('conditions' => array('Personne.name' => $directorName)));
-			if($tmp != null){
-				$data['Director']['id'] = $tmp['Personne']['id']; 
-			}
-		}
-
-		// Traitement nationalité
-		$nationality = trim($data['Country']['nationality']);
-		if( $nationality != ''){
-			$tmp = $this->Country->find('first', array('conditions' => array('Country.nationality' => $nationality)));
-			if($tmp != null){
-				$data['Country']['id'] = $tmp['Country']['id']; 
-			}
-		}
-
-		// Sauvegarde de la vidéo et des association belongsTo.
-		if(!$this->Video->saveAssociated($data)) return false;
-
-
-		//// Associations HABTM
-
-		// Traitement acteurs
-		$actors = explode(',',$data['Video']['Acteurs']);
-		$data['Video']['Acteurs'] = array();
-
-		$actorArray = array();
-		foreach ($actors as $k => $v) {
-			$actor = array();
-			$v = trim($v);
-			if($v != ''){
-				$actor['Video'] = array('id' => $data['Video']['id']);
-
-				$tmp = $this->Personne->find('first', array('conditions' => array('Personne.name' => $v)));
-				if($tmp != null){
-					$actor['Personne'] = $tmp['Personne']; 
-				}else{
-					$this->Personne->create();
-					$actor['Personne'] = array('name' => $v);	
-				}
-				$actorArray[] = $actor;
-			}
-		}
-		if(!$this->Personne->saveAll($actorArray)) return false;
-
-		// Traitement catégories
-		$categories = explode(',',$data['Video']['Categories']);
-		$categoryArray = array();
-		foreach ($categories as $k => $v) {
-			$category = array();
-			$v = trim($v);
-			if($v != ''){
-				$category['Video'] = array('id' => $data['Video']['id']);
-
-				$tmp = $this->Category->find('first', array('conditions' => array('Category.name' => $v)));
-				if($tmp != null){
-					$category['Category'] = $tmp['Category']; 
-				}else{
-					$this->Category->create();
-					$category['Category'] = array('name' => $v);	
-				}
-				$categoryArray[] = $category;
-			}
-		}
-		if(!$this->Category->saveAll($categoryArray)) return false;
-
-
-		return true;
-	}
-
-
-	function admin_edit($id = null){
-		// Pour charger la liste des formats dans la prochaine page
-		$this->set('formats', $this->Video->Format->find('list'));
-		$this->set('acteurs', $this->Video->Personne->find('list'));
-		$this->set('webroot', $this->webroot);
-
+	public function admin_edit($id = null){
+		// Pour charger les listes dans la prochaine page
 		if($this->request->is('put') || $this->request->is('post')){	// Vrai quand du contenu a été modifié ou ajouté(cf /lib/Cake/Network/CakeRequest.php)
-			if($this->saveVideo($this->request->data)){
+			if($this->Video->saveVideo($this->request->data)){
 				$this->Session->setFlash('La vidéo a bien été modifiée.','notif'); 
 				$this->redirect(array('action' => 'index'));
 				return;
@@ -218,22 +168,16 @@ class VideosController extends AppController{
 			// charge data avec les données de la vidéo dont l'id est passé en paramètre
 			$this->Video->id = $id;
 			$this->request->data = $this->Video->read();
-			$this->request->data['Video']['Acteurs'] = $this->format_textarea($this->request->data['Personne']);
-			$this->request->data['Video']['Categories'] = $this->format_textarea($this->request->data['Category']);
-		}
-		// formatage du tableau pour bien passer dans le typeahead.
-		$lstActeurs = array();
-		foreach ($this->Personne->find('list') as $k => $v) {
-			$lstActeurs[] = '"'.$v.'"' ;
+			
+			$this->request->data['Video']['Acteurs'] = $this->Actor->formatTextArea($this->request->data['Actor']);
+			$this->request->data['Video']['Categories'] = $this->CategoriesVideo->formatTextArea($this->request->data['CategoriesVideo']);
 		}
 
-		$lstCategories = array();
-		foreach ($this->Category->find('list') as $k => $v) {
-			$lstCategories[] = '"'.$v.'"' ;
-		}
-
-		$this->request->data['lstActeurs'] = "[".implode(', ',$lstActeurs)."]";
-		$this->request->data['lstCategories'] = "[".implode(', ',$lstCategories)."]";
+		$d['formats'] = $this->Video->Format->find('list');
+		$d['webroot'] = $this->webroot;
+		$d['lstActors'] = $this->Personne->find('typeahead');
+		$d['lstCategories'] = $this->Category->find('typeahead');
+		$this->set($d);
 	}
 
 	public function admin_addimg($id_video = null){
@@ -299,16 +243,5 @@ class VideosController extends AppController{
 		$this->render('popup');
 	}
 
-	public function admin_ajaxParse($video_id){
-		$this->AllocineParser = $this->Components->load('AllocineParser');
-		echo json_encode($this->AllocineParser->parse($video_id));
-	}
-
-	public function admin_ajaxAllocineSearch($video_title){
-		$this->AllocineParser = $this->Components->load('AllocineParser');
-		$this->autoRender = false;
-		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
-		echo $this->AllocineParser->searchResults($video_title);
-	}
 }
 ?>

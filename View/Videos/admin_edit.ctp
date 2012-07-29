@@ -25,7 +25,7 @@
 
 		<table>
 			<tr>
-				<td style="width:60%;">
+				<td class='span6'>
 					<!-- Infos générales	 -->
 					<?php echo $this->Form->input('name', array('label' => 'Titre') ); ?>
 
@@ -37,7 +37,7 @@
 						'type' 					=> 'textarea',
 						'rows' 					=> 2,
 						'data-provide' 	=> 'typeahead',
-						'data-source' 	=> $this->request->data['lstActeurs'],
+						'data-source' 	=> $lstActors,
 						'data-mode' 		=> 'multiple',
 						'data-items'		=> '10'
 					)); ?> 
@@ -46,14 +46,14 @@
 						'label' => 'Réalisateur',
 						'autocomplete' => 'off',
 						'data-provide' 	=> 'typeahead',
-						'data-source' 	=> $this->request->data['lstActeurs']
+						'data-source' 	=> $lstActors
 					)); ?>	
 
 					<?php echo $this->Form->input('Video.Categories',array(
 						'type'          => 'textarea',
 						'rows'          => 2,
 						'data-provide' 	=> 'typeahead',
-						'data-source' 	=> $this->request->data['lstCategories'],
+						'data-source' 	=> $lstCategories,
 						'data-mode' 	=> 'multiple',
 						'data-items'	=> '10'
 					)); ?> 
@@ -78,7 +78,7 @@
 				</td>
 
 				<!-- Jaquette, etc. -->
-				<td style="width:40%;">
+				<td class='span6'>
 					<?php 
 						if (isset($this->request->data['Video'])){
 							$url = $this->request->data['Video']['cover'];

@@ -18,11 +18,23 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 function toggleAdvancedSearch () {
 	$('#AdvancedSearchDiv').toggleClass('hide');
 	$('#SearchSubmit').toggleClass('hide');
-	$('#SearchAdvanced').val($('#AdvancedSearchDiv').hasClass('hide')? '0' : '1'); // faux (0) quand caché.
+
+	if( $('#AdvancedSearchDiv').hasClass('hide') ){
+		$('#SearchAdvanced').val('0');
+		$('#AdvancedSearchTrigger').html('Recherche avanc&eacutee [+]');
+		$('#SearchNameLabel').html('Recherche');
+		$('#SearchName').attr('placeholder','Titre');
+	}
+	else{
+		$('#SearchAdvanced').val('1');
+		$('#AdvancedSearchTrigger').html('Recherche avanc&eacutee [&#8211]');  // &#8211: code pour un gros -
+		$('#SearchNameLabel').html('Titre');
+		$('#SearchName').attr('placeholder','');
+	}
 }
 
 function fillVideoPreview(video_id){
-	console.log('displayVideoInfo: ' + video_id);
+	console.log('fillVideoPreview: ' + video_id);
 
 	var query_url = $('#PreviewUrl').attr('href');
 	console.log(query_url);

@@ -5,20 +5,6 @@
 		$admin = false;
 	}
 
-	function outputcsv($array, $list=false){
-		$ret = array();
-		foreach ($array as $k => $v) {
-			if(gettype($v) == 'array'){
-				$ret[] = $v['name'];	
-			}
-			else if($list){
-				$ret[] = "'".$v."'";
-			}
-			
-		}
-		return implode(', ',$ret);
-	}
-
 ?>
 
 <div class="page-header">
@@ -32,14 +18,32 @@
 
 <?php echo $this->Form->create('Search',array('class' => 'form-search well')); ?>
 
-<?php echo $this->Form->input('advanced',array('type' => 'hidden', 'value' => '0')); ?> 
+	<?php echo $this->Form->input('advanced',array('type' => 'hidden', 'value' => '0')); ?> 
+	
+	<?php echo $this->Html->link("Recherche avancée [+]", '#', array(
+		'onclick'    => 'toggleAdvancedSearch(); return false;'
+		, 'style'    => 'float: right;'
+		, 'tabindex' => -1
+		, 'id'       => 'AdvancedSearchTrigger'
+	)); ?>
 
-<?php echo $this->Form->input('name',array('label' => 'Recherche ', 'placeholder' => 'Titre')); ?>
+	<?php echo $this->Form->input('name',array(
+			'label' => array('text' => 'Recherche ', 'id' => 'SearchNameLabel')
+		, 'placeholder' => 'Titre'
+	)); ?>
+	
+	<div id="AdvancedSearchDiv" class='hide'>
+		<?php echo $this->Form->input('format',array('label' => 'Format')); ?>
+		<?php echo $this->Form->input('category',array('label' => 'Genre')); ?>
+		<?php echo $this->Form->input('actor', array(
+				'label'         => 'Acteur'
+			, 'type'          => 'text'
+			, 'autocomplete'  => 'off'
+			, 'data-provide' 	=> 'typeahead'
+			, 'data-source' 	=> $lstActors
+		)); ?>
 
-<?php echo $this->Html->link("Recherche avancée", '#', array('onclick' => 'toggleAdvancedSearch(); return false;')); ?>
-<div id="AdvancedSearchDiv" class='hide'>
-	<?php echo $this->Form->input('format',array('label' => 'Format ')); ?>
-</div>
+	</div>
 
 <?php echo $this->Form->end(array('label' => 'Rechercher',  'div'=> array('class' => 'hide', 'id' => 'SearchSubmit'))); ?>
 
@@ -70,7 +74,7 @@
 
 		<td><?php echo $v['Format']['name'] ?></td>
 
-		<td><?php echo outputcsv($v['Category']); ?></td>
+		<td><?php echo $v['Video']['categories'] ?></td>
 
 		<?php if ($admin): ?>
 		<td>
@@ -111,4 +115,7 @@
 	, array('style' => 'visibility: none;', 'id' => 'PreviewUrl')); ?>
 
 <?php echo $this->Paginator->numbers() ?>
+
+<?php echo $this->Html->script('bootstrap-typeahead',array('inline' => false)); ?>
 <?php echo $this->Html->script('index',array('inline' => false)); ?>
+
