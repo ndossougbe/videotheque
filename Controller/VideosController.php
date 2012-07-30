@@ -46,14 +46,37 @@ class VideosController extends AppController{
 
 	/// Actions
 	public function index(){
-
 		// debug($this->request->data);
+		// debug($this->request->params);
+
+		$search = array();
+
+		if($this->request->is("post")) {
+	    $url = array('action'=>'index');
+	    if( $this->request->params['admin'] ){
+	    	$url['prefix'] = 'admin';
+	    }
+	    $filters = array();
+
+	    if(isset($this->request->data['Search']) && $this->data['Search']){
+	        //maybe clean up user input here??? or urlencode??
+	        $filters['Search'] = $this->request->data['Search'];
+	    }
+	    //redirect user to the index page including the selected filters
+	    $this->redirect(array_merge($url,$filters)); 
+		}
+		else if ( isset($this->request->params['named']['Search']) ){
+			$search = $this->request->params['named']['Search'];
+		}
+
+		
+
+		// debug($search);
 		// Filtrage
 		$conditions = array();
 		$joins = array();
 
-		if( !empty($this->request->data) ){
-			$search = $this->request->data['Search'];
+		if( !empty($search) ){
 			if($search['name']) $conditions['Video.name LIKE'] = '%'.$search['name'].'%';	
 
 			if($search['advanced']){
@@ -82,13 +105,13 @@ class VideosController extends AppController{
 					// debug($actors);
 					
 					$joins[] = array(
-							'table' => 'personnes_videos'
-            , 'alias' => 'PersonnesVideo'
+							'table' => 'actors'
+            , 'alias' => 'Actor'
             , 'type' => 'inner'
             , 'foreignKey' => false
-            , 'conditions'=> array('PersonnesVideo.video_id = Video.id')
+            , 'conditions'=> array('Actor.video_id = Video.id')
 					);
-					$conditions['PersonnesVideo.personne_id'] = $actors;
+					$conditions['Actor.personne_id'] = $actors;
 				}
 			}
 		}
@@ -98,7 +121,7 @@ class VideosController extends AppController{
 				'conditions' => $conditions
 			, 'joins' => $joins
 			, 'fields' => array('DISTINCT Video.name', 'Video.format_id', 'Video.id', 'Format.name')
-			// ,'limit' => 2
+			,'limit' => 1
 		));
 		$d['videos'] = $this->Paginate('Video');
 

@@ -17,7 +17,7 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 
 function toggleAdvancedSearch () {
 	$('#AdvancedSearchDiv').toggleClass('hide');
-	$('#SearchSubmit').toggleClass('hide');
+	$('#SearchSubmit').toggleClass('almost_hide');
 
 	if( $('#AdvancedSearchDiv').hasClass('hide') ){
 		$('#SearchAdvanced').val('0');
@@ -39,7 +39,6 @@ function fillVideoPreview(video_id){
 	var query_url = $('#PreviewUrl').attr('href');
 	console.log(query_url);
 	$.get(query_url +'/'+ video_id, {}, function(data) {
-		// var data = '{"cover": "/videotheque/img/covers/test-pass-icon.png", "synopsis": "bleh", "casting": "doh"}';
 		var video_preview = jQuery.parseJSON(data);
 		console.log(video_preview);
 
@@ -48,13 +47,15 @@ function fillVideoPreview(video_id){
 		$('#PreviewName').html(video_preview.name);
 		$('#PreviewSynopsis').html(video_preview.synopsis);
 		$('#PreviewCasting').html(video_preview.casting);
+		$('#PreviewDiv').removeClass('hide');
 	});
 
 }
 
 function emptyVideoPreview(){
-	$('#PreviewCover').attr('src','/videotheque/img/covers/jaquette_indisponible.png');
-	$('#PreviewName').html('');
-	$('#PreviewSynopsis').html('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
-	$('#PreviewCasting').html('Toto titi, machin truc, bidule chose.');
+	$('#PreviewDiv').addClass('hide');
+	// $('#PreviewCover').attr('src','/videotheque/img/covers/jaquette_indisponible.png');
+	// $('#PreviewName').html('');
+	// $('#PreviewSynopsis').html('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+	// $('#PreviewCasting').html('Toto titi, machin truc, bidule chose.');
 }
