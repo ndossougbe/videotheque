@@ -12,7 +12,6 @@
 			'id'            => 'SearchBtn'
 			, 'class'         => 'btn'
 			, 'escape'        => false
-			, 'data-toggle'   => 'modal'
 			, 'onclick'				=> 'return searchAction()'
 		)
 	);?>
@@ -88,35 +87,59 @@
 					'style' => 'max-width: 200px',
 					'id'	=> 'CoverPreview'
 				)); ?>
-				<div>
-					<a href="#", onclick="return popup('<?php echo $this->Html->url(array(
-						'action' => 'addimg',
-						'controller' => 'videos',
-						$id
-						), true); ?>');">Insérer une image</a>
+			<div>
+
+			<?php echo $this->Form->input('Video.cover', array(
+					'label' => 'Jaquette'
+				, 'placeholder' => 'lien vers l\'image'
+				, 'onblur' => 'updateCover()' 
+			)); ?>	
+
+			<!--<?php echo $this->Html->link(
+				'Importer une jaquette'
+				, array('action' => 'uploadCover')
+				, array(
+						'id'            => 'UploadCoverBtn'
+					, 'class'         => 'btn'
+					, 'onclick'				=> 'return uploadCoverAction()'
+				)
+			);?>-->
+
+
 				</div>
 			</div>
-			<?php echo $this->Form->hidden('cover'); ?>			
+			<?php //echo $this->Form->hidden('cover'); ?>			
 
 			<?php echo $this->Form->label('synopsis', 'Synopsis', array('style' => 'display: block')); ?>	
 			<?php echo $this->Form->input('synopsis', array('label' => false, 'style' => 'width: 100%')); ?>	
 		</div>
 	</div>
 
-	<?php echo $this->Form->submit("Enregistrer", array('class' => 'btn') )?>
+	<?php echo $this->Form->end( "Enregistrer", array('class' => 'btn') ); ?>
+</div>
 
-	<div class="modal hide" id="search_modal">
-		<div class="modal-header">
-			<button class="close" data-dismiss="modal">&times;</button>
-			<h3>Résultats de la recherche</h3>
-		</div>
-		<div class="modal-body" id="SearchResults"></div>
+
+<!-- Modals -->
+<div class="modal hide" id="search_modal">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">&times;</button>
+		<h3>Résultats de la recherche</h3>
+	</div>
+	<div class="modal-body" id="SearchResults"></div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+	</div>
+</div>
+
+<div id='UploadCoverModal' class='modal hide'>
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">&times;</button>
+			<h3>Importer une jaquette</h3>
+	</div>
+	<div class="modal-body" id="UploadCoverContentDiv"></div>
 		<div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
 		</div>
-	</div>
-
-	<?php echo $this->Form->end(); ?>
 </div>
 
 <!-- JavaScript -->

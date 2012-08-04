@@ -7,7 +7,7 @@ class VideosController extends AppController{
 	public $uses = array('Video','Personne','Category', 'Country', 'Actor', 'CategoriesVideo');
 	public $jaquette_indisponible = "covers/jaquette_indisponible.png";
 	
-		/* Condition de projection*/
+	/* Condition de projection*/
 		/*$q=$this->Video->find('all',array(
 			'fields'=>array('name')
 		));
@@ -15,176 +15,205 @@ class VideosController extends AppController{
 
 		/* Condition de sélection: find('all',array(
 			'conditions' => array('format' => 1)
-		));*/
+			));*/
 	//Convention: $d => tableau des variables envoyées à la vue (display)
 
 	/// Fonctions ajax
-	public function ajaxPreview($id){
-		$this->Video->id = $id;
-		$video = $this->Video->read();
+public function ajaxPreview($id){
+	$this->Video->id = $id;
+	$video = $this->Video->read();
 
-		$ret = array(
-			'cover'      => $video['Video']['cover']
-			, 'name'     => $video['Video']['name']
-			, 'synopsis' => $video['Video']['synopsis']
-			, 'casting'  => $this->Actor->formatTextArea($video['Actor'])
+	$ret = array(
+		'cover'      => $video['Video']['cover']
+		, 'name'     => $video['Video']['name']
+		, 'synopsis' => $video['Video']['synopsis']
+		, 'casting'  => $this->Actor->formatTextArea($video['Actor'])
 		);
-		echo json_encode($ret);
-	}
-	
-	public function admin_ajaxParse($video_id){
-		$this->AllocineParser = $this->Components->load('AllocineParser');
-		echo json_encode($this->AllocineParser->parse($video_id));
-	}
+	echo json_encode($ret);
+}
 
-	public function admin_ajaxAllocineSearch($video_title){
-		$this->AllocineParser = $this->Components->load('AllocineParser');
-		$this->autoRender = false;
-		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
-		echo $this->AllocineParser->searchResults($video_title);
-	}
+public function admin_ajaxParse($video_id){
+	$this->AllocineParser = $this->Components->load('AllocineParser');
+	echo json_encode($this->AllocineParser->parse($video_id));
+}
+
+public function admin_ajaxAllocineSearch($video_title){
+	$this->AllocineParser = $this->Components->load('AllocineParser');
+	echo $this->AllocineParser->searchResults($video_title);
+}
 
 	/// Actions
-	public function index(){
+public function index(){
 		// debug($this->request->data);
 		// debug($this->request->params);
 
-		$search = array();
+	$search = array();
 
-		if($this->request->is("post")) {
-	    $url = array('action'=>'index');
-	    if( $this->request->params['admin'] ){
-	    	$url['prefix'] = 'admin';
-	    }
-	    $filters = array();
+	if($this->request->is("post")) {
+		$url = array('action'=>'index');
+		if( $this->request->params['admin'] ){
+			$url['prefix'] = 'admin';
+		}
+		$filters = array();
 
-	    if(isset($this->request->data['Search']) && $this->data['Search']){
+		if(isset($this->request->data['Search']) && $this->data['Search']){
 	        //maybe clean up user input here??? or urlencode??
-	        $filters['Search'] = $this->request->data['Search'];
-	    }
+			$filters['Search'] = $this->request->data['Search'];
+		}
 	    //redirect user to the index page including the selected filters
-	    $this->redirect(array_merge($url,$filters)); 
-		}
-		else if ( isset($this->request->params['named']['Search']) ){
-			$search = $this->request->params['named']['Search'];
-		}
+		$this->redirect(array_merge($url,$filters)); 
+	}
+	else if ( isset($this->request->params['named']['Search']) ){
+		$search = $this->request->params['named']['Search'];
+	}
 
-		
+
 
 		// debug($search);
 		// Filtrage
-		$conditions = array();
-		$joins = array();
+	$conditions = array();
+	$joins = array();
+	if( !empty($search) ){
+		if($search['name']){
+			$conditions['Video.name LIKE'] = '%'.$search['name'].'%';
+		} 
 
-		if( !empty($search) ){
-			if($search['name']) $conditions['Video.name LIKE'] = '%'.$search['name'].'%';	
-
-			if($search['advanced']){
+		if($search['advanced']){
 				// Le choix neutre a pour valeur 0 <=> false <=> pas de condition supplémentaire.
-				if($search['format']) $conditions['Video.format_id'] = $search['format'];
+			if($search['format']) $conditions['Video.format_id'] = $search['format'];
 
 				// HABTM, c'est un peu plus compliqué:
-				if($search['category']){
-					$joins[] = array(
-							'table' => 'categories_videos'
-            , 'alias' => 'CategoriesVideo'
-            , 'type' => 'inner'
-            , 'foreignKey' => false
-            , 'conditions'=> array('CategoriesVideo.video_id = Video.id')
+			if($search['category']){
+				$joins[] = array(
+					'table' => 'categories_videos'
+					, 'alias' => 'CategoriesVideo'
+					, 'type' => 'inner'
+					, 'foreignKey' => false
+					, 'conditions'=> array('CategoriesVideo.video_id = Video.id')
 					);
-					$conditions['CategoriesVideo.category_id'] = $search['category'];
-				}
+				$conditions['CategoriesVideo.category_id'] = $search['category'];
+			}
 
-				
-				if($search['actor']){
-					$actors = $this->Personne->find('list',array(
-						'conditions' => array('Personne.name LIKE' => '%'.$search['actor'].'%')
-						, 'fields' => array('Personne.id')
+
+			if($search['actor']){
+				$actors = $this->Personne->find('list',array(
+					'conditions' => array('Personne.name LIKE' => '%'.$search['actor'].'%')
+					, 'fields' => array('Personne.id')
 						, 'recursive' => -1 	// Pour ne pas aller checher les infos de videos et cie associés.
-					));
+						));
 					// debug($actors);
-					
-					$joins[] = array(
-							'table' => 'actors'
-            , 'alias' => 'Actor'
-            , 'type' => 'inner'
-            , 'foreignKey' => false
-            , 'conditions'=> array('Actor.video_id = Video.id')
+
+				$joins[] = array(
+					'table' => 'actors'
+					, 'alias' => 'Actor'
+					, 'type' => 'inner'
+					, 'foreignKey' => false
+					, 'conditions'=> array('Actor.video_id = Video.id')
 					);
-					$conditions['Actor.personne_id'] = $actors;
-				}
+				$conditions['Actor.personne_id'] = $actors;
 			}
 		}
-		
+	}
+	else{
+			// Defaults
+		$search = array(
+			'name' => ''
+			, 'format' => 1
+			, 'category' => 1
+			, 'actor' => ''
+			, 'printable' => false
+			, 'advanced' => false
+			);
+	}
+
+	if($search['printable']){
+		$this->displayPrintable($conditions,$joins);
+		return;
+	}
+
 		// Règles de pagination, définies ici localement. Mettre au début du ctrl pour global.
-		$this->paginate = array('Video' => array(
-				'conditions' => $conditions
-			, 'joins' => $joins
-			, 'fields' => array('DISTINCT Video.name', 'Video.format_id', 'Video.id', 'Format.name')
+	$this->paginate = array('Video' => array(
+		'conditions' => $conditions
+		, 'joins' => $joins
+		, 'fields' => array('DISTINCT Video.name', 'Video.format_id', 'Video.id', 'Format.name')
 			// ,'limit' => 1
 		));
-		$d['videos'] = $this->Paginate('Video');
+	$d['videos'] = $this->Paginate('Video');
 
-		foreach ($d['videos'] as $k => $v) {
-			$d['videos'][$k]['Video']['categories'] = $this->CategoriesVideo->formatTextArea($d['videos'][$k]['CategoriesVideo']);
-		}
+	foreach ($d['videos'] as $k => $v) {
+		$d['videos'][$k]['Video']['categories'] = $this->CategoriesVideo->formatTextArea($d['videos'][$k]['CategoriesVideo']);
+	}
 
 		// Aussi étrange que ça puisse paraître, cela met bien le deuxième tableau à la suite du premier.
-		$d['formats'] = array(0 => ' ------ ') + $this->Video->Format->find('list');
-		$d['categories'] = array(0 => ' ------ ') + $this->Category->find('list');
-		$d['lstActors'] = $this->Personne->find('typeahead');
+	$d['formats'] = array(0 => ' ------ ') + $this->Video->Format->find('list');
+	$d['categories'] = array(0 => ' ------ ') + $this->Category->find('list');
+	$d['lstActors'] = $this->Personne->find('typeahead');
 		// debug($d);
-		$this->set($d);
-	}
+	$this->set($d);
+	$this->set($search);
+}
 
-	public function admin_index(){
-		$this->index();
-		$this->render('index');
-	}
+public function admin_index(){
+	$this->index();
+	$this->render('index');
+}
 
-	public function menu(){
-		$videos = $this->Video->find('all',array('fields' => array('id','name')));
-		return $videos;
-	}
-	
-	public function show($id = null){
-		if( !$id )
-			throw new NotFoundException('ID nul');
-		
-		$data = $this->Video->find('first',array('conditions' => array('Video.id' => $id)));
-		
-		if( !$data )
-			throw new NotFoundException('Aucune vidéo ne correspond à cet ID ('.$id.').');
-					
-		$video = array(
-				'name'        => $data['Video']['name']
-			, 'url'         => $data['Video']['url']
-			, 'format'      => $data['Format']['name']
-			, 'created'     => $data['Video']['created']
-			, 'cover'       => $data['Video']['cover']
-			, 'director'    => $data['Director']['name']
-			, 'nationality' => $data['Country']['nationality']
-			, 'synopsis'    => $data['Video']['synopsis']
-			, 'duration'    => $data['Video']['duration']
-			, 'releasedate' => $data['Video']['releasedate']
-			, 'rating'      => $data['Video']['rating']
-			, 'actors'      => $this->Actor->formatTextArea($data['Actor'])
-			, 'categories'  => $this->CategoriesVideo->formatTextArea($data['CategoriesVideo'])
+public function displayPrintable($conditions, $joins){
+	$videos = $this->Video->find('list', array(
+		'conditions' => $conditions
+		, 'joins' => $joins
+		, 'fields' => array('Video.name')
+		, 'order' => 'name ASC'
+			// ,'limit' => 1
+		));
+	$this->set('videos',$videos);
+	$this->render('printable','ajax');
+	// $this->layout = null;
+}
+
+public function menu(){
+	$videos = $this->Video->find('all',array('fields' => array('id','name')));
+	return $videos;
+}
+
+public function show($id = null){
+	if( !$id )
+		throw new NotFoundException('ID nul');
+
+	$data = $this->Video->find('first',array('conditions' => array('Video.id' => $id)));
+
+	if( !$data )
+		throw new NotFoundException('Aucune vidéo ne correspond à cet ID ('.$id.').');
+
+	$video = array(
+		'name'        => $data['Video']['name']
+		, 'url'         => $data['Video']['url']
+		, 'format'      => $data['Format']['name']
+		, 'created'     => $data['Video']['created']
+		, 'cover'       => $data['Video']['cover']
+		, 'director'    => $data['Director']['name']
+		, 'nationality' => $data['Country']['nationality']
+		, 'synopsis'    => $data['Video']['synopsis']
+		, 'duration'    => $data['Video']['duration']
+		, 'releasedate' => $data['Video']['releasedate']
+		, 'rating'      => $data['Video']['rating']
+		, 'actors'      => $this->Actor->formatTextArea($data['Actor'])
+		, 'categories'  => $this->CategoriesVideo->formatTextArea($data['CategoriesVideo'])
 
 		);	
-		$d['video'] = $video;
-		$this->set($d);
-	}
+	$d['video'] = $video;
+	$this->set($d);
+}
 
-	public function admin_show($id = null){
-		$this->show($id);
-		$this->render('show');
-	}
+public function admin_show($id = null){
+	$this->show($id);
+	$this->render('show');
+}
 
-	public function admin_delete($id){
+public function admin_delete($id){
 		// Message de notifications. Utilise le template View/Elements/notif.ctp
-		$this->Session->setFlash('La vidéo a bien été supprimée.','notif'); 
-		$this->Video->delete($id);
+	$this->Session->setFlash('La vidéo a bien été supprimée.','notif'); 
+	$this->Video->delete($id);
 		$this->redirect($this->referer()); // redirige sur la page appelante.
 	}
 
@@ -212,8 +241,8 @@ class VideosController extends AppController{
 		$this->set($d);
 	}
 
-	public function admin_addimg($id_video = null){
-		$this->layout = 'modal';
+	public function admin_uploadCover($id_video = null){
+		$this->autoRender = true;
 		if($id_video){
 			$cover_dir = 'covers';
 			if($this->request->is('post')){
@@ -225,7 +254,7 @@ class VideosController extends AppController{
 						'action' => 'updateCover',
 						'controller' => 'Videos',
 						'?url='.urlencode($data['url'])
-					));
+						));
 				}
 
 				$dir = IMAGES.$cover_dir;
@@ -251,7 +280,7 @@ class VideosController extends AppController{
 						'action' => 'updateCover',
 						'controller' => 'Videos',
 						'?url='.urlencode($url)
-					));
+						));
 				}else{
 					$this->Session->setFlash("L'image n'est pas au bon format",'notif',array('type' => 'error'));
 				}

@@ -1,4 +1,5 @@
 jQuery(function($){ // pour être sûr que jquery est chargé, etc.
+	applyAdvancedSearchState($('#SearchAdvanced').val() == 1);		
 
 	// TODO: affichage infos par là.
 	$("#VideoTable").delegate('td','mouseover mouseleave', function(e) {
@@ -16,20 +17,29 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 });
 
 function toggleAdvancedSearch () {
-	$('#AdvancedSearchDiv').toggleClass('hide');
-	$('#SearchSubmit').toggleClass('almost_hide');
-
-	if( $('#AdvancedSearchDiv').hasClass('hide') ){
-		$('#SearchAdvanced').val('0');
-		$('#AdvancedSearchTrigger').html('Recherche avanc&eacutee [+]');
-		$('#SearchNameLabel').html('Recherche');
-		$('#SearchName').attr('placeholder','Titre');
+	if( $('#SearchAdvanced').val() == 1 ){
+		$('#SearchAdvanced').val(0);
+		applyAdvancedSearchState(false);		
+	}else{
+		$('#SearchAdvanced').val(1);
+		applyAdvancedSearchState(true);		
 	}
-	else{
-		$('#SearchAdvanced').val('1');
-		$('#AdvancedSearchTrigger').html('Recherche avanc&eacutee [&#8211]');  // &#8211: code pour un gros -
+}
+
+function applyAdvancedSearchState(advanced){
+	if( advanced ){
+		$('#AdvancedSearchDiv').removeClass('hide');
+		$('#SearchSubmit').removeClass('almost_hide');
+		$('#AdvancedSearchTrigger').html('Recherche avanc&eacutee [&#8211]');
 		$('#SearchNameLabel').html('Titre');
 		$('#SearchName').attr('placeholder','');
+	}
+	else{
+		$('#AdvancedSearchDiv').addClass('hide');
+		$('#SearchSubmit').addClass('almost_hide');
+		$('#AdvancedSearchTrigger').html('Recherche avanc&eacutee [+]');  // &#8211: code pour un gros -
+		$('#SearchNameLabel').html('Recherche');
+		$('#SearchName').attr('placeholder','Titre');
 	}
 }
 

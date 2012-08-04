@@ -7,30 +7,13 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
         $(this).parent().find('.error-message').remove();
     });
 
-});
-
-
-function clearCurrentLink(node){
-    if(node == null){
-		node = document;
-    }
-    var links = node.getElementsByTagName("A");
-    for(var i = 0; i < links.length; i++){
-		if(links[i].href == window.location.href.split("#")[0]){
-            //console.log(links[i]);
-            links[i].parentNode.className = "active";
-            //removeNode(links[i]);
+    $('.nav a').each(function(){
+        if('http://' + window.location.hostname + $(this).attr('href') == window.location.href.split("#")[0]){
+            console.log($(this))
+            $(this).addClass('active');
+            // TODO: remplacer le lien par du texte? juste changer le style?
         }
-			
-    }
-}
+            
+    });
 
-function removeNode(n){
-    if(n.hasChildNodes())
-        for(var i=0;i<n.childNodes.length;i++)
-            n.parentNode.insertBefore(n.childNodes[i].cloneNode(true),n);
-    n.parentNode.removeChild(n);
-}
-
-
-window.onload = clearCurrentLink($('.nav'));
+});

@@ -17,7 +17,7 @@ if(isset($this->request->params['prefix']) && $this->request->params['prefix'] =
 
 
 <?php echo $this->Form->create('Search',array('class' => 'form-search well')); ?>
-<?php echo $this->Form->input('advanced',array('type' => 'hidden', 'value' => '0')); ?> 
+<?php echo $this->Form->input('advanced',array('type' => 'hidden', 'value' => $advanced)); ?> 
 
 <?php echo $this->Html->link("Recherche avancée [+]", '#', array(
 	'onclick'    => 'toggleAdvancedSearch(); return false;'
@@ -27,22 +27,32 @@ if(isset($this->request->params['prefix']) && $this->request->params['prefix'] =
 	)); ?>
 
 <?php echo $this->Form->input('name',array(
-	'label' => array('text' => 'Recherche ', 'id' => 'SearchNameLabel')
+		'label' => array('text' => 'Recherche ', 'id' => 'SearchNameLabel')
 	, 'placeholder' => 'Titre'
+	, 'value' => $name
 	)); ?>
 	
 	<div id="AdvancedSearchDiv" class='hide'>
-		<?php echo $this->Form->input('format',array('label' => 'Format')); ?>
-		<?php echo $this->Form->input('category',array('label' => 'Genre')); ?>
+		<?php echo $this->Form->input('format',array('label' => 'Format', 'value' => $format)); ?>
+		<?php echo $this->Form->input('category',array('label' => 'Genre', 'value' => $category)); ?>
 		<?php echo $this->Form->input('actor', array(
 			'label'         => 'Acteur'
 			, 'type'          => 'text'
 			, 'autocomplete'  => 'off'
 			, 'data-provide' 	=> 'typeahead'
 			, 'data-source' 	=> $lstActors
+			, 'value' => $actor
 			)); ?>
 
 	</div>
+
+<?php echo $this->Html->link("Version imprimable", '#', array(
+	  'style'    => 'float: right;'
+	, 'tabindex' => -1
+	, 'onclick'  => '$("#SearchPrintable").val(1); $("form:first").submit();'
+	)); ?>
+
+	<?php echo $this->Form->input('printable',array('type' => "hidden")); ?> 
 
 <?php echo $this->Form->end(array('label' => 'Rechercher',  'div'=> array('class' => 'almost_hide', 'id' => 'SearchSubmit'))); ?>
 

@@ -48,6 +48,9 @@ class AllocineParserComponent extends Component {
 
 
 	public function searchResults($searchString){
+		// Attention, des erreurs on été cachées par les @ devant la fonction.
+
+
 		$html = $this->getHtml($searchString,'search');
 		$ret = $html->find('div.vmargin10t',0);
 		$ret->onLoad =  "$('a:first').focus()"; // TODO ne fonctionne pas.
@@ -82,18 +85,23 @@ class AllocineParserComponent extends Component {
 					break;
 				
 				case 'Date de sortie':
-					$relDate = strtotime(trim($v->find('span[itemprop=datePublished]',0)->content));
+					$relDate = @strtotime(trim($v->find('span[itemprop=datePublished]',0)->content));
 
 					$ret[$this->fieldNames['datePublished'].'Year'] = date("Y", $relDate);
 					$ret[$this->fieldNames['datePublished'].'Month'] = date("m", $relDate);
 					$ret[$this->fieldNames['datePublished'].'Day'] = date("d", $relDate);
 
-					$duration = trim($v->find('span[itemprop=duration]',0)->innertext);
+					$duration = trim(@$v->find('span[itemprop=duration]',0)->innertext);
 					// on passe l'heure du format H'h 'MM'mins' en HH:MM
 					$duration = strtotime('0'.str_replace('h ',':',str_replace('min','',$duration)));
+					if($duration){
+						$ret[$this->fieldNames['duration'].'Hour'] = date("H", $duration);
+						$ret[$this->fieldNames['duration'].'Min'] = date("i", $duration);	
+					}else{
+						$ret[$this->fieldNames['duration'].'Hour'] = 0;
+						$ret[$this->fieldNames['duration'].'Min'] = 0;	
+					}
 					
-					$ret[$this->fieldNames['duration'].'Hour'] = date("H", $duration);
-					$ret[$this->fieldNames['duration'].'Min'] = date("i", $duration);
 					break;
 
 				case 'Nationalité':
@@ -116,7 +124,8 @@ class AllocineParserComponent extends Component {
 		}
 
 		// TODO note x 4 pour être noté sur 20
-		$ret[$this->fieldNames['rating']] =  4 * (float)trim($html->find('span.note',0)->innertext);
+		$ratingTag = $html->find('span.note',0);
+		$ret[$this->fieldNames['rating']] =  4 * (float)trim(@$html->find('span.note',0)->innertext);
 
 		// Infos de la fiche casting
 		$html = $this->getHtml($id,'casting');
