@@ -11,10 +11,10 @@
 ?>
 
 
-<?php echo $this->Html->link($cakeDescription, '/',array('class' => 'brand', 'tabindex' => -1));?>
+<?php echo $this->Html->link($cakeDescription, array('action' => 'index', 'controller' => 'videos'), array('class' => 'brand', 'tabindex' => -1));?>
 <div class="nav-collapse">
 	<ul class="nav">
-		<li><?php echo $this->Html->link("Accueil", '/', array('tabindex' => -1)); ?></li>
+		<!-- <li><?php echo $this->Html->link("Accueil", '/', array('tabindex' => -1)); ?></li> -->
 		<li><?php echo $this->Html->link("Catalogue", array('action' => 'index', 'controller' => 'videos'), array('tabindex' => -1));?></li>
 
 		<?php if ($admin): ?>

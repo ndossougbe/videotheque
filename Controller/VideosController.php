@@ -121,7 +121,7 @@ class VideosController extends AppController{
 				'conditions' => $conditions
 			, 'joins' => $joins
 			, 'fields' => array('DISTINCT Video.name', 'Video.format_id', 'Video.id', 'Format.name')
-			,'limit' => 1
+			// ,'limit' => 1
 		));
 		$d['videos'] = $this->Paginate('Video');
 
@@ -148,22 +148,31 @@ class VideosController extends AppController{
 	}
 	
 	public function show($id = null){
-		if(!$id)
+		if( !$id )
 			throw new NotFoundException('ID nul');
 		
-		$video = $this->Video->find('first',array('conditions' => array('Video.id' => $id)));
+		$data = $this->Video->find('first',array('conditions' => array('Video.id' => $id)));
 		
-		if(empty($video))
+		if( !$data )
 			throw new NotFoundException('Aucune vidéo ne correspond à cet ID ('.$id.').');
-			
-		/*
-		if($slug != $video['Video']['link']['slug'])
-			//erreur 301: moved permanently. ex, dit à google que la page a été remplacée.
-			$this->redirect($video['Video']['link'],301);
-		*/
-			
-		// Une fois que les vérifs sont faites, on envoie l'objet
-		$d['video'] = current($video);
+					
+		$video = array(
+				'name'        => $data['Video']['name']
+			, 'url'         => $data['Video']['url']
+			, 'format'      => $data['Format']['name']
+			, 'created'     => $data['Video']['created']
+			, 'cover'       => $data['Video']['cover']
+			, 'director'    => $data['Director']['name']
+			, 'nationality' => $data['Country']['nationality']
+			, 'synopsis'    => $data['Video']['synopsis']
+			, 'duration'    => $data['Video']['duration']
+			, 'releasedate' => $data['Video']['releasedate']
+			, 'rating'      => $data['Video']['rating']
+			, 'actors'      => $this->Actor->formatTextArea($data['Actor'])
+			, 'categories'  => $this->CategoriesVideo->formatTextArea($data['CategoriesVideo'])
+
+		);	
+		$d['video'] = $video;
 		$this->set($d);
 	}
 

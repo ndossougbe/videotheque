@@ -33,4 +33,4 @@ function removeNode(n){
 }
 
 
-window.onload = clearCurrentLink(document.getElementById("menu"));
+window.onload = clearCurrentLink($('.nav'));
