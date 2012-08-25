@@ -64,10 +64,13 @@ class AllocineParserComponent extends Component {
 
 
     public function parse($id) {
+    $this->log("[AllocineParser::parse] Début.");
 		$ret = array();
 
 		// Infos de l'onglet d'accueil de la fiche du film
 		$html = $this->getHtml($id,'general');
+
+		$this->log("[AllocineParser::parse] Page d'infos générales récupérée.");
 
 		$ret[$this->fieldNames['title']] = trim($html->find('div#title',0)->find('span',0)->innertext);
 		$ret[$this->fieldNames['description']] = trim($html->find('p[itemprop=description]',0)->innertext);
@@ -127,8 +130,12 @@ class AllocineParserComponent extends Component {
 		$ratingTag = $html->find('span.note',0);
 		$ret[$this->fieldNames['rating']] =  4 * (float)trim(@$html->find('span.note',0)->innertext);
 
+		$this->log("[AllocineParser::parse] Fin traitement infos générales");
+
 		// Infos de la fiche casting
 		$html = $this->getHtml($id,'casting');
+
+		$this->log("[AllocineParser::parse] Page casting récupérée.");
 
 		$director = $html->find('div.media_list_02',0)->find('li[itemscope]',0);
 		$ret[$this->fieldNames['director']] = trim($director->find('span[itemprop]',0)->innertext);
@@ -137,7 +144,7 @@ class AllocineParserComponent extends Component {
 		foreach ($actors as $key => $value) {
 			$ret[$this->fieldNames['actors']][] = trim($value->find('span[itemprop]',0)->innertext);
 		}
-		
+		$this->log("[AllocineParser::parse] Fin.");
 		return $ret;      
     }
 }

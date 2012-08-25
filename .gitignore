@@ -5,3 +5,4 @@ app/config/database.php
 !empty
 error_log
 upload_tuto.php
+tmp/**

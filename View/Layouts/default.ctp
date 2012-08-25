@@ -54,7 +54,7 @@ $cakeDescription = __d('cake_dev', 'Videothèque');
     </div> <!-- /container -->
 
     <?php echo $this->element('sql_dump'); ?>
-    <!--><script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>-->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>-->
     <?php
     	echo $this->Html->script('jquery');
       echo $this->Html->script('global_functions');

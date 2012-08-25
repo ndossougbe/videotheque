@@ -44,6 +44,7 @@ public function admin_ajaxAllocineSearch($video_title){
 
 	/// Actions
 public function index(){
+	$this->log("index");
 		// debug($this->request->data);
 		// debug($this->request->params);
 
@@ -154,6 +155,7 @@ public function index(){
 }
 
 public function admin_index(){
+	$this->log("admin_index");
 	$this->index();
 	$this->render('index');
 }
