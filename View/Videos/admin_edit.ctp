@@ -6,8 +6,8 @@
 	<?php echo $this->Form->create('Video',array('default' => false,'class' => 'form-search well', 'onsubmit' => 'searchAction();')); ?>
 	<input type='text' class='input-medium search-query' id='VideoSearch' placeholder='Titre de film'/>
 	<?php echo $this->Html->link(
-		'<i class="icon-search"></i> Chercher sur Allociné'
-		, array('action' => 'ajaxAllocineSearch')
+		'<i class="icon-search"></i> Rechercher en ligne'
+		, array('action' => 'ajaxSearch')
 		, array(
 			'id'            => 'SearchBtn'
 			, 'class'         => 'btn'

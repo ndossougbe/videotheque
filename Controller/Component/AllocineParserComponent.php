@@ -52,6 +52,7 @@ class AllocineParserComponent extends Component {
 
 
 		$html = $this->getHtml($searchString,'search');
+		debug($html);
 		$ret = $html->find('div.vmargin10t',0);
 		$ret->onLoad =  "$('a:first').focus()"; // TODO ne fonctionne pas.
 		foreach($ret->find('a') as $a){

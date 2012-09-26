@@ -38,12 +38,12 @@ function gifLoader(){
 	return '<div align="center"><img src="/videotheque/img/ajax-loader.gif" style="width:100px;"></div>';
 }
 
-function videoLinkSelected(videoUrl){
-	$('#VideoUrl').val(videoUrl);
+function videoSelected(videoId){
+	$('#VideoUrl').val('http://www.themoviedb.org/movie/' + videoId);
 	$('#SearchResults').html(gifLoader());
-	var id_video = videoUrl.match(/cfilm=((\d*))\.html/)[1];
-	console.log("idvideo: " + id_video);
-	$.get('/videotheque/admin/videos/ajaxParse/'+ id_video, {}, function(data) {
+	console.log("idvideo: " + videoId);
+	$.get('/videotheque/admin/videos/ajaxMovieInfo/'+ videoId, {}, function(data) {
+		// $('#SearchResults').html(data);
 		loadFields(data);
 		$('#search_modal').modal('hide');
 	});

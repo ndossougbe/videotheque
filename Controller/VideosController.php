@@ -37,9 +37,23 @@ public function admin_ajaxParse($video_id){
 	echo json_encode($this->AllocineParser->parse($video_id));
 }
 
-public function admin_ajaxAllocineSearch($video_title){
-	$this->AllocineParser = $this->Components->load('AllocineParser');
-	echo $this->AllocineParser->searchResults($video_title);
+// public function admin_ajaxAllocineSearch($video_title){
+// 	$this->AllocineParser = $this->Components->load('AllocineParser');
+// 	echo $this->AllocineParser->searchResults($video_title);
+// }
+
+public function admin_ajaxSearch($video_title){
+	$this->TMDB = $this->Components->load('TMDB');
+	$this->set($this->TMDB->searchMovie($video_title));
+	$this->render('ajax_search_output');
+}
+
+public function admin_ajaxMovieInfo($video_id){
+	$this->TMDB = $this->Components->load('TMDB');
+	$r = $this->TMDB->getMovie($video_id);
+	// debug($r);
+	echo json_encode($r);
+	// echo json_encode($this->TMDB->getMovie($video_id));
 }
 
 	/// Actions
@@ -257,6 +271,7 @@ public function admin_delete($id){
 						'controller' => 'Videos',
 						'?url='.urlencode($data['url'])
 						));
+					die();
 				}
 
 				$dir = IMAGES.$cover_dir;
@@ -300,6 +315,7 @@ public function admin_delete($id){
 	}
 
 	public function admin_updateCover(){
+		// Dégueu!
 		//$this->set('url',Router::url('/img/'.urldecode($this->request->query['url'])));
 		$this->set('url',urldecode($this->request->query['url']));
 		$this->layout = false;	// layout désactivé sur la prochaine fenêtre.
