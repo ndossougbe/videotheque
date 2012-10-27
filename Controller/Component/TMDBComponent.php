@@ -37,6 +37,9 @@ class TMDBComponent extends Component {
 		// Nom Film
 		$retour['VideoName'] = $movieInfo['title'];
 
+		// Titre original
+		$retour['VideoOriginalTitle'] = $movieInfo['original_title'];
+
 		// Catégories
 		foreach ($movieInfo['genres'] as $key => $value) {
 			$retour['VideoCategories'][] = $value['name'];	

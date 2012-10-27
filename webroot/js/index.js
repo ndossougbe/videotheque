@@ -17,27 +17,24 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 	});
 
 	/* Scroll de la div de détail des films ************************************/
-	// $(document).ready(function(){
-		// Récupération de la position initiale. Si auto alors on prend 0.
-		var top = $('#PreviewDivWrapper').offset().top - parseFloat($('#PreviewDivWrapper').css('margin-top').replace(/auto/, 0));
-		var left = $('#PreviewDivWrapper').offset().left - parseFloat($('#PreviewDivWrapper').css('margin-left').replace(/auto/, 0));
-	  $(window).scroll(function (event) {
-	    // Récupération de la position de scroll actuelle
-	    var y = $(this).scrollTop();
-	  	console.log("scroll! y=" +y);
-	  
-	    // Test si on est sous la div
-	    if (y >= top) {
-	      // Oui, on ajoute la classe fixed
-	      $('#PreviewDivWrapper').addClass('fixed');
-	      $('#PreviewDivWrapper').css('left',left);
-	    } else {
-	      // Non, on l'enlève
-	      $('#PreviewDivWrapper').removeClass('fixed');
-	      $('#PreviewDivWrapper').css('left','');	      
-	    }
+	// Récupération de la position initiale. Si auto alors on prend 0.
+	var top = $('#PreviewDivWrapper').offset().top - parseFloat($('#PreviewDivWrapper').css('margin-top').replace(/auto/, 0));
+	var left = $('#PreviewDivWrapper').offset().left - parseFloat($('#PreviewDivWrapper').css('margin-left').replace(/auto/, 0));
+  $(window).scroll(function (event) {
+    // Récupération de la position de scroll actuelle
+    var y = $(this).scrollTop();
+
+    // Test si on est sous la div
+    if (y >= top) {
+      // Oui, on ajoute la classe fixed
+      $('#PreviewDivWrapper').addClass('fixed');
+      $('#PreviewDivWrapper').css('left',left);
+    } else {
+      // Non, on l'enlève
+      $('#PreviewDivWrapper').removeClass('fixed');
+      $('#PreviewDivWrapper').css('left','');	      
+    }
 	  });
-	// });
 
 });
 
@@ -77,9 +74,14 @@ function fillVideoPreview(video_id){
 		var video_preview = jQuery.parseJSON(data);
 		//console.log(video_preview);
 
+		var video_title = video_preview.name;
+		if (video_preview.original_title && video_preview.name != video_preview.original_title){
+			video_title += " (" + video_preview.original_title + ")";
+		}
+
 		// console.log($('#PreviewSynopsis'));
 		$('#PreviewCover').attr('src',video_preview.cover);
-		$('#PreviewName').html(video_preview.name);
+		$('#PreviewName').html(video_title);
 		$('#PreviewSynopsis').html(video_preview.synopsis);
 		$('#PreviewCasting').html(video_preview.casting);
 		$('#PreviewDiv').removeClass('hide');

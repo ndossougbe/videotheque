@@ -20,6 +20,11 @@
 
 
 			<dl class='dl-horizontal' >
+				<?php if ($video['original_title'] && $video['original_title'] != $video['name']): ?>
+					<dt>Titre original</dt>
+					<dd><?php echo $video['original_title']; ?></dd>			
+				<?php endif ?>
+
 				<?php if ($video['format']): ?>
 					<dt>Format</dt>
 					<dd><?php echo $video['format']; ?></dd>			

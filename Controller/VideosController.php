@@ -24,10 +24,11 @@ public function ajaxPreview($id){
 	$video = $this->Video->read();
 
 	$ret = array(
-		'cover'      => $video['Video']['cover']
-		, 'name'     => $video['Video']['name']
-		, 'synopsis' => $video['Video']['synopsis']
-		, 'casting'  => $this->Actor->formatTextArea($video['Actor'])
+		'cover'            => $video['Video']['cover']
+		, 'name'           => $video['Video']['name']
+		, 'original_title' => $video['Video']['original_title']
+		, 'synopsis'       => $video['Video']['synopsis']
+		, 'casting'        => $this->Actor->formatTextArea($video['Actor'])
 		);
 	echo json_encode($ret);
 }
@@ -202,19 +203,20 @@ public function show($id = null){
 		throw new NotFoundException('Aucune vidéo ne correspond à cet ID ('.$id.').');
 
 	$video = array(
-		'name'        => $data['Video']['name']
-		, 'url'         => $data['Video']['url']
-		, 'format'      => $data['Format']['name']
-		, 'created'     => $data['Video']['created']
-		, 'cover'       => $data['Video']['cover']
-		, 'director'    => $data['Director']['name']
-		, 'nationality' => $data['Country']['nationality']
-		, 'synopsis'    => $data['Video']['synopsis']
-		, 'duration'    => $data['Video']['duration']
-		, 'releasedate' => $data['Video']['releasedate']
-		, 'rating'      => $data['Video']['rating']
-		, 'actors'      => $this->Actor->formatTextArea($data['Actor'])
-		, 'categories'  => $this->CategoriesVideo->formatTextArea($data['CategoriesVideo'])
+		'name'             => $data['Video']['name']
+		, 'original_title' => $data['Video']['original_title']
+		, 'url'            => $data['Video']['url']
+		, 'format'         => $data['Format']['name']
+		, 'created'        => $data['Video']['created']
+		, 'cover'          => $data['Video']['cover']
+		, 'director'       => $data['Director']['name']
+		, 'nationality'    => $data['Country']['nationality']
+		, 'synopsis'       => $data['Video']['synopsis']
+		, 'duration'       => $data['Video']['duration']
+		, 'releasedate'    => $data['Video']['releasedate']
+		, 'rating'         => $data['Video']['rating']
+		, 'actors'         => $this->Actor->formatTextArea($data['Actor'])
+		, 'categories'     => $this->CategoriesVideo->formatTextArea($data['CategoriesVideo'])
 
 		);	
 	$d['video'] = $video;

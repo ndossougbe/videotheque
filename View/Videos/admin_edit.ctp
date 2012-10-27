@@ -24,6 +24,8 @@
 		<div class='span6'>
 			<!-- Infos générales	 -->
 			<?php echo $this->Form->input('name', array('label' => 'Titre') ); ?>
+			
+			<?php echo $this->Form->input('original_title', array('label' => 'Titre original') ); ?>
 
 			<?php echo $this->Form->input('url', array('label' => 'Lien')); ?>
 
