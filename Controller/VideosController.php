@@ -159,19 +159,19 @@ public function index(){
 		$d['videos'][$k]['Video']['categories'] = $this->CategoriesVideo->formatTextArea($d['videos'][$k]['CategoriesVideo']);
 	}
 
-		// Aussi étrange que ça puisse paraître, cela met bien le deuxième tableau à la suite du premier.
+		// Aussi étrange que ça puisse paraître, le '+' met bien le deuxième tableau à la suite du premier.
 	$d['formats'] = array(0 => ' ------ ') + $this->Video->Format->find('list');
 	$d['categories'] = array(0 => ' ------ ') + $this->Category->find('list');
 	$d['lstActors'] = $this->Personne->find('typeahead');
 		// debug($d);
 	$this->set($d);
 	$this->set($search);
+	$this->render('index');
 }
 
 public function admin_index(){
 	$this->log("admin_index");
 	$this->index();
-	$this->render('index');
 }
 
 public function displayPrintable($conditions, $joins){

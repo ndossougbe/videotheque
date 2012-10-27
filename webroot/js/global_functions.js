@@ -9,7 +9,7 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 
     $('.nav a').each(function(){
         if('http://' + window.location.hostname + $(this).attr('href') == window.location.href.split("#")[0]){
-            console.log($(this))
+            // console.log($(this))
             $(this).addClass('active');
             // TODO: remplacer le lien par du texte? juste changer le style?
         }

@@ -78,7 +78,7 @@ class Video extends AppModel{
 		// Traiment cover? online vs local?
 		// Traitement Note
 		$rating = str_replace(',','.',$data['Video']['rating']);
-		$data['Video']['rating'] = $rating;
+		$data['Video']['rating'] = intval($rating);
 	
 		// Traitement réalisateur
 		$directorName = trim($data['Director']['name']);

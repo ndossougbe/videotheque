@@ -49,7 +49,7 @@ if(isset($this->request->params['prefix']) && $this->request->params['prefix'] =
 <?php echo $this->Html->link("Version imprimable", '#', array(
 	  'style'    => 'float: right;'
 	, 'tabindex' => -1
-	, 'onclick'  => '$("#SearchPrintable").val(1); $("form:first").submit();'
+	, 'onclick'  => '$("#SearchPrintable").val(1); $("form:first").submit(); $("#SearchPrintable").val(0);'
 	)); ?>
 
 	<?php echo $this->Form->input('printable',array('type' => "hidden")); ?> 
@@ -70,7 +70,6 @@ if(isset($this->request->params['prefix']) && $this->request->params['prefix'] =
 
 		</thead>
 
-		<?php //debug($videos) ?>
 
 		<?php foreach ($videos as $k => $v): ?>
 		<tr>
@@ -98,8 +97,8 @@ if(isset($this->request->params['prefix']) && $this->request->params['prefix'] =
 	</table>
 </div>
 
-<div class="span4" id='truc'>
-	<div class="well hide" id="PreviewDiv">
+<div class="span4" id='PreviewDivWrapper'>
+	<div class="well hidef" id="PreviewDiv">
 		<div align="center">
 			<img id="PreviewCover" style="max-width: 200px" id="CoverPreview">
 		</div>

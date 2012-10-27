@@ -15,8 +15,8 @@ class TMDBComponent extends Component {
 		// On charge l'API
 		$keys = get_class_vars('API_KEYS');
 		$this->tmdb = new TMDb($keys['tmdb'],'fr');
-		// clé session fonctionnelle: 0eb1faed2961a8af5e37b913644365dae20d80fe
-		$this->tmdb->setAuthSession('TODO');
+		// Nécéssaire tant qu'on s'authentifie par bidouillage
+		$this->tmdb->setAuthSession($keys['tmdbSession']);
 	}
 
 	public function searchMovie($query){
@@ -44,7 +44,7 @@ class TMDBComponent extends Component {
 		$retour['VideoCategories'] = implode(',',$retour['VideoCategories']);
 
 		// Nationality
-		$retour['CountryNationality'] = $movieInfo['production_countries'][0]['name'];
+		if($movieInfo['production_countries']) $retour['CountryNationality'] = $movieInfo['production_countries'][0]['name'];
 
 		// Date de sortie
 		foreach ($movieReleases['countries'] as $key => $value) {
