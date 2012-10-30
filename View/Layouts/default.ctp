@@ -30,7 +30,11 @@ $cakeDescription = __d('cake_dev', 'Videothèque');
     </style>
   </head>
 
+  <?php if ($this->action == 'index' || $this->action == 'admin_index'): ?>
+  <body style="min-height:800px">
+  <?php else: ?>
   <body>
+  <?php endif ?>
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">

@@ -3,17 +3,18 @@ jQuery(function($){ // pour être sûr que jquery est chargé, etc.
 	applyAdvancedSearchState($('#SearchAdvanced').val() == 1);		
 
 	/* Affichage du détail des films *******************************************/
-	$("#VideoTable").delegate('td','mouseover mouseleave', function(e) {
+	$("#VideoTable").delegate('td','mouseover', function(e) {
 		if (e.type == 'mouseover') {
 			$(this).parent().addClass("hover");
 			$("colgroup").eq($(this).index()).addClass("hover");
 			fillVideoPreview($('.hover').find('a')[0].getAttribute('data-id'));
 		}
-		else {
-			$(this).parent().removeClass("hover");
-			$("colgroup").eq($(this).index()).removeClass("hover");
-			emptyVideoPreview();
-		}
+		// Pour l'activer: remplacer 'mouseover' par 'mouseover mouseleave'
+		// else {
+		// 	$(this).parent().removeClass("hover");
+		// 	$("colgroup").eq($(this).index()).removeClass("hover");
+		// 	emptyVideoPreview();
+		// }
 	});
 
 	/* Scroll de la div de détail des films ************************************/
